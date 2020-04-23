@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerViewController" customModule="EGPlayer" customModuleProvider="target">
             <connections>
                 <outlet property="displayView" destination="PAV-0T-tGs" id="h2b-JW-Aj1"/>
+                <outlet property="slider" destination="lpY-b0-Jl2" id="RZa-U0-yLl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -45,7 +46,7 @@
                         </button>
                     </subviews>
                 </stackView>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lpY-b0-Jl2">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="lpY-b0-Jl2">
                     <rect key="frame" x="18" y="576" width="378" height="31"/>
                     <connections>
                         <action selector="valueChanged:" destination="-1" eventType="valueChanged" id="GBv-L4-LvC"/>
