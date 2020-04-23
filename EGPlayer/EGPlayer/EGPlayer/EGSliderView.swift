@@ -10,13 +10,13 @@ import UIKit
 
 protocol EGSliderViewDelegate {
     ///滑块滑动开始
-    func sliderTouchBegan(value: CGFloat)
+    func sliderTouchBegan(value: TimeInterval)
     /// 滑块滑动中
-    func sliderValueChanged(value: CGFloat)
+    func sliderValueChanged(value: TimeInterval)
     /// 滑块滑动结束
-    func sliderTouchEnded(value: CGFloat)
+    func sliderTouchEnded(value: TimeInterval)
     /// 滑杆点击
-    func sliderTapped(value: CGFloat)
+    func sliderTapped(value: TimeInterval)
     
 }
 
@@ -35,6 +35,9 @@ class EGSliderView: UIView, NibLoadable {
     @IBOutlet weak var sliderWidth: NSLayoutConstraint!
     ///滑块view
     @IBOutlet weak var sliderView: UIView!
+    
+    /// 是否正在拖动
+    var isdragging: Bool = false
     
     var delegate: EGSliderViewDelegate?
     
@@ -86,7 +89,7 @@ class EGSliderView: UIView, NibLoadable {
         var value = (point.x - sliderView.bounds.width * 0.5) * 1.0 / bgProgressView.bounds.width
         value = value > 1.0 ? 1.0 : value <= 0 ? 0 : value
         self.value = value
-        self.delegate?.sliderTapped(value: value)
+        self.delegate?.sliderTapped(value: TimeInterval(value))
         
     }
     
@@ -106,14 +109,14 @@ class EGSliderView: UIView, NibLoadable {
     }
     
     private func sliderBtnTouchBegin(view: UIView) {
-        self.delegate?.sliderTouchBegan(value: self.value)
+        self.delegate?.sliderTouchBegan(value: TimeInterval(self.value))
         UIView.animate(withDuration: 0.3) {
             view.transform = CGAffineTransform.init(scaleX: 1.2, y: 1.2)
         }
     }
     
     private func sliderBtnTouchEnded(view: UIView) {
-        self.delegate?.sliderTouchEnded(value: self.value)
+        self.delegate?.sliderTouchEnded(value: TimeInterval(self.value))
         
         UIView.animate(withDuration: 0.3) {
             view.transform = CGAffineTransform.identity
@@ -129,7 +132,7 @@ class EGSliderView: UIView, NibLoadable {
             return
         }
         self.value = value
-        self.delegate?.sliderValueChanged(value: value)
+        self.delegate?.sliderValueChanged(value: TimeInterval(value))
         
     }
     
