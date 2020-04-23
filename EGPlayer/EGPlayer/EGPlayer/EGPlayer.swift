@@ -10,9 +10,9 @@ import UIKit
 import AVFoundation
 
 class EGPlayer {
-    var player: AVPlayer?
+    let player = AVPlayer()
 
-    lazy var displayView = DisplayerLayer()
+    var displayView = DisplayerLayer()
 
     init(controlView: UIView & PlayerControlable) {
         controlView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,11 +31,9 @@ class EGPlayer {
     func pause() {
     }
 
-    /// 播放URL
-    func playForUrl(_ url: String) {
-    }
-
-    /// 替换当前播放的URL
-    func replaceCurrentUrl(_ url: String) {
+    func setUrl(_ url: String) {
+        guard let url = URL(string: url) else { return }
+        let item = AVPlayerItem(url: url)
+        player.replaceCurrentItem(with: item)
     }
 }
