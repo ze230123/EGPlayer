@@ -21,7 +21,7 @@ protocol EGSliderViewDelegate {
 }
 
 ///进度条
-class EGSliderView: UIView {
+class EGSliderView: UIView, NibLoadable {
     
     ///底部view
     @IBOutlet weak var bgProgressView: UIView!
@@ -55,13 +55,18 @@ class EGSliderView: UIView {
         }
     }
     
-    static var nib: UINib? {
-        return UINib(nibName: String(describing: self), bundle: nil)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initViewFromNib()
         addOtherActions()
+
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initViewFromNib()
+        addOtherActions()
+
     }
     
     // MARK: - User action

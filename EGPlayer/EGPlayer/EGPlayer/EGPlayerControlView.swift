@@ -35,13 +35,6 @@ class EGPlayerControlView: UIView, NibLoadable, PlayerControlable {
         initViewFromNib()
     }
 
-    static var nib: UINib? {
-        return UINib(nibName: String(describing: self), bundle: nil)
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }
 
 extension EGPlayerControlView {
