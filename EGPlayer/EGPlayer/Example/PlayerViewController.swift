@@ -33,4 +33,8 @@ class PlayerViewController: UIViewController {
     @IBAction func pauseAction() {
         player.pause()
     }
+
+    @IBAction func valueChanged(_ sender: UISlider) {
+        player.player.volume = sender.value
+    }
 }

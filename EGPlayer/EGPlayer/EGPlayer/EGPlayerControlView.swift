@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class EGPlayerControlView: UIView, NibLoadable, PlayerControlable {
+class EGPlayerControlView: UIView, NibLoadable {
 
 
     @IBOutlet weak var topView: UIView!
@@ -34,27 +34,17 @@ class EGPlayerControlView: UIView, NibLoadable, PlayerControlable {
         super.init(coder: coder)
         initViewFromNib()
     }
-
 }
 
-extension EGPlayerControlView {
-    
-    func playFaild(error: Error) {
+extension EGPlayerControlView: PlayerControlable {
+    func playerDidChangedState(_ state: EGPlayer.State) {
+        print(state)
     }
-    
-    func playDidCache() {
-    }
-    
-    func playDidCanPlay() {
-    }
-    
+
     func setCacheProgress(_ progress: Double) {
     }
 
     func setPlayTime(_ time: Double, total: Double) {
-    }
-
-    func playStatueDidChanged() {
     }
 }
     

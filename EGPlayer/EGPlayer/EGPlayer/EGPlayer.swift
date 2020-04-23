@@ -9,6 +9,21 @@
 import UIKit
 import AVFoundation
 
+//typedef NS_ENUM(NSInteger, NIAVPlayerStatus) {
+//    NIAVPlayerStatusLoading = 0,     // 加载视频
+//    NIAVPlayerStatusReadyToPlay,     // 准备好播放
+//    NIAVPlayerStatusIsPlaying,       // 正在播放
+//    NIAVPlayerStatusIsPaused,        // 已经暂停
+//    NIAVPlayerStatusPlayEnd,         // 播放结束
+//    NIAVPlayerStatusCacheData,       // 缓冲视频
+//    NIAVPlayerStatusCacheEnd,        // 缓冲结束
+//    NIAVPlayerStatusPlayStop,        // 播放中断 （多是没网）
+//    NIAVPlayerStatusItemFailed,      // 视频资源问题
+//    NIAVPlayerStatusEnterBack,       // 进入后台
+//    NIAVPlayerStatusBecomeActive,    // 从后台返回
+//};
+
+
 class EGPlayer {
     let player = AVPlayer()
 
@@ -17,6 +32,7 @@ class EGPlayer {
 
     init<V: UIView>(controlView: V) where V: PlayerControlable {
         displayView = DisplayerLayer()
+        self.controlView = controlView
         controlView.player = player
         layoutControl(controlView)
         prepare()
@@ -24,6 +40,7 @@ class EGPlayer {
 
     init<V: UIView>(displayView: DisplayerLayer, controlView: V) where V: PlayerControlable {
         self.displayView = displayView
+        self.controlView = controlView
         controlView.player = player
         layoutControl(controlView)
         prepare()
@@ -47,22 +64,15 @@ class EGPlayer {
         addKVO(item: item)
     }
 
-    var statusObser: NSKeyValueObservation?
     var timeObserverToken: Any?
 
     var loadedTimeRangesObser: NSKeyValueObservation?
-    var playbackBufferEmptyObser: NSKeyValueObservation?
-    var playbackLikelyToKeepUpObser: NSKeyValueObservation?
 
     var timeControlStatusObser: NSKeyValueObservation?
 }
 
 extension EGPlayer {
     func addKVO(item: AVPlayerItem) {
-        /// item状态
-        statusObser = item.observe(\.status, changeHandler: { (item, _) in
-            print(item.status.rawValue, item.error?.localizedDescription)
-        })
         /// 缓冲
         loadedTimeRangesObser = item.observe(\.loadedTimeRanges, changeHandler: { (item, _) in
             guard let timeRange = item.loadedTimeRanges.first?.timeRangeValue else { return }
@@ -70,23 +80,25 @@ extension EGPlayer {
             let durationSecound = timeRange.duration.seconds
             let cache = startSecounds + durationSecound
             let total = item.duration.seconds
-            print("缓冲", cache, total, cache / total)
+            self.controlView.setCacheProgress(cache / total)
         })
 
-        playbackBufferEmptyObser = item.observe(\.isPlaybackBufferEmpty) { (item, _) in
-            print("缓存不够了 自动暂停播放")
+        timeControlStatusObser = player.observe(\.timeControlStatus) { [unowned self] (item, _) in
+            switch item.timeControlStatus {
+            case .paused:
+                self.controlView.playerDidChangedState(.paused)
+            case .playing:
+                self.controlView.playerDidChangedState(.playing)
+            case .waitingToPlayAtSpecifiedRate:
+                self.controlView.playerDidChangedState(.cache)
+            @unknown default:
+                fatalError()
+            }
         }
-
-        playbackLikelyToKeepUpObser = item.observe(\.isPlaybackLikelyToKeepUp, changeHandler: { (item, _) in
-            print("缓存好了 手动播放")
-        })
     }
 
     func removeKVO() {
-        statusObser = nil
         loadedTimeRangesObser = nil
-        playbackBufferEmptyObser = nil
-        playbackLikelyToKeepUpObser = nil
     }
 }
 
@@ -110,11 +122,6 @@ extension EGPlayer {
             let currentTime = time.seconds
             let totalTime = self.player.currentItem?.duration.seconds ?? 0
             self.controlView.setPlayTime(currentTime, total: totalTime)
-            print(currentTime, totalTime, Float(currentTime / totalTime))
-        }
-
-        timeControlStatusObser = player.observe(\.timeControlStatus) { [unowned self] (item, _) in
-            self.controlView.playStatueDidChanged()
         }
     }
 
@@ -130,8 +137,13 @@ extension EGPlayer {
 
     @objc func playError() {
         guard let error = player.error else { return }
-        controlView.playFaild(error: error)
+        controlView.playerDidChangedState(.failed(error))
         print("播放失败", error.localizedDescription)
-        player.status
+    }
+}
+
+extension EGPlayer {
+    enum State {
+        case loading, readyToPlay, playing, paused, playEnd, cache, cacheEnd, failed(Error)
     }
 }
