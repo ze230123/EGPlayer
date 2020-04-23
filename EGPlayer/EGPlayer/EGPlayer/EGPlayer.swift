@@ -90,7 +90,7 @@ extension EGPlayer {
             case .playing:
                 self.controlView.playerDidChangedState(.playing)
             case .waitingToPlayAtSpecifiedRate:
-                self.controlView.playerDidChangedState(.cache)
+                self.controlView.playerDidChangedState(.cacheing)
             @unknown default:
                 fatalError()
             }
@@ -144,6 +144,6 @@ extension EGPlayer {
 
 extension EGPlayer {
     enum State {
-        case loading, readyToPlay, playing, paused, playEnd, cache, cacheEnd, failed(Error)
+        case loading, readyToPlay, playing, paused, playEnd, cacheing, failed(Error)
     }
 }

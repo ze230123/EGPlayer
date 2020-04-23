@@ -29,6 +29,7 @@ class EGPlayerControlView: UIView, NibLoadable, PlayerControlable {
     /// 滑杆
     @IBOutlet weak var sliderView: EGSliderView!
     
+    @IBOutlet weak var loadingView: UIActivityIndicatorView!
     weak var player: AVPlayer?
     
     var totalTime: TimeInterval {
@@ -49,6 +50,10 @@ class EGPlayerControlView: UIView, NibLoadable, PlayerControlable {
         initViewFromNib()
     }
     
+    func initSubViews() {
+        self.allTimeLabel.text = convertTimeSecond(timeSecond: Int(self.totalTime))
+    }
+    
 }
 
 ///竖屏方法
@@ -59,8 +64,7 @@ extension EGPlayerControlView {
      }
      
     @objc func playPauseButtonClickAction() {
-     
-         
+        playOrPause()
      }
      
     @objc func fullScreenButtonClickAction() {
@@ -98,21 +102,32 @@ extension EGPlayerControlView {
 /// controlView 方法
 extension EGPlayerControlView {
     
-    func hideAllControlView() {
-        UIView.animate(withDuration: 0.3, animations: {
+    func hideAllControlViewWithAnimated(_ animated: Bool) {
+        UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.hideControlView()
         }) { (finished) in
             print(finished)
         }
     }
     
-    func showAllControlView() {
-        UIView.animate(withDuration: 0.3, animations: {
+    func showAllControlViewWithAnimated(_ animated: Bool) {
+        UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.showControlView()
         }) { (finished) in
             print(finished)
         }
     }
+    
+    func startAnimating() {
+        self.loadingView.startAnimating()
+        self.loadingView.isHidden = false
+    }
+    
+    func stopAnimating() {
+        self.loadingView.stopAnimating()
+        self.loadingView.isHidden = true
+    }
+    
 }
 
 ///PlayerControlable 协议方法
@@ -120,28 +135,51 @@ extension EGPlayerControlView {
     
     /// 播放失败
     func playFaild(error: Error) {
+        stopAnimating()
     }
     
     /// 视频需要缓冲
     func playDidCache() {
+        startAnimating()
+        
     }
     
     /// 视频可以播放
     func playDidCanPlay() {
-        hideAllControlView()
     }
 
     func playerDidChangedState(_ state: EGPlayer.State) {
-        print(state)
+        
+        switch state {
+        case.loading:
+            startAnimating()
+        case .readyToPlay:
+            hideAllControlViewWithAnimated(true)
+        case .playing:
+            playerButton.isSelected = true
+            stopAnimating()
+        case .paused, .playEnd:
+            playerButton.isSelected = false
+        case .cacheing:
+            startAnimating()
+        case .failed(let error):
+            print(error)
+            playerButton.isSelected = false
+            stopAnimating()
+            
+        }
+        
     }
 
     func setCacheProgress(_ progress: Double) {
+        self.sliderView.bufferValue = CGFloat(progress)
     }
 
     func setPlayTime(_ time: Double, total: Double) {
+        self.currentTimeLabel.text = convertTimeSecond(timeSecond: Int(time))
+        self.sliderView.value = CGFloat(time / total)
     }
 }
-
 extension EGPlayerControlView: EGSliderViewDelegate {
     
     func sliderTouchBegan(value: TimeInterval) {
