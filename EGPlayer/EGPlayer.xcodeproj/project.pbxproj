@@ -19,9 +19,11 @@
 		7679FDA524512AE7007CA928 /* DisplayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FDA424512AE7007CA928 /* DisplayerLayer.swift */; };
 		7679FDA724512D1A007CA928 /* PlayerControlable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FDA624512D1A007CA928 /* PlayerControlable.swift */; };
 		7679FDA924512F5C007CA928 /* EGPlayerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FDA824512F5C007CA928 /* EGPlayerControlView.swift */; };
-		840986BD2451387C00BD7760 /* EGPlayerControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840986BC2451387C00BD7760 /* EGPlayerControlView.xib */; };
 		7679FDAD24513751007CA928 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FDAB24513751007CA928 /* PlayerViewController.swift */; };
 		7679FDAE24513751007CA928 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7679FDAC24513751007CA928 /* PlayerViewController.xib */; };
+		840986BD2451387C00BD7760 /* EGPlayerControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840986BC2451387C00BD7760 /* EGPlayerControlView.xib */; };
+		840986BF24515D4800BD7760 /* EGSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986BE24515D4800BD7760 /* EGSliderView.swift */; };
+		840986C124515D6000BD7760 /* EGSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840986C024515D6000BD7760 /* EGSliderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +62,11 @@
 		7679FDA424512AE7007CA928 /* DisplayerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayerLayer.swift; sourceTree = "<group>"; };
 		7679FDA624512D1A007CA928 /* PlayerControlable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlable.swift; sourceTree = "<group>"; };
 		7679FDA824512F5C007CA928 /* EGPlayerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayerControlView.swift; sourceTree = "<group>"; };
-		840986BC2451387C00BD7760 /* EGPlayerControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EGPlayerControlView.xib; sourceTree = "<group>"; };
 		7679FDAB24513751007CA928 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		7679FDAC24513751007CA928 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
+		840986BC2451387C00BD7760 /* EGPlayerControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EGPlayerControlView.xib; sourceTree = "<group>"; };
+		840986BE24515D4800BD7760 /* EGSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGSliderView.swift; sourceTree = "<group>"; };
+		840986C024515D6000BD7760 /* EGSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EGSliderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,8 @@
 				7679FDA624512D1A007CA928 /* PlayerControlable.swift */,
 				7679FDA824512F5C007CA928 /* EGPlayerControlView.swift */,
 				840986BC2451387C00BD7760 /* EGPlayerControlView.xib */,
+				840986BE24515D4800BD7760 /* EGSliderView.swift */,
+				840986C024515D6000BD7760 /* EGSliderView.xib */,
 			);
 			path = EGPlayer;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 				7679FD7E24504B56007CA928 /* LaunchScreen.storyboard in Resources */,
 				840986BD2451387C00BD7760 /* EGPlayerControlView.xib in Resources */,
 				7679FDAE24513751007CA928 /* PlayerViewController.xib in Resources */,
+				840986C124515D6000BD7760 /* EGSliderView.xib in Resources */,
 				7679FD7B24504B56007CA928 /* Assets.xcassets in Resources */,
 				7679FD7924504B55007CA928 /* Main.storyboard in Resources */,
 			);
@@ -304,6 +311,7 @@
 				7679FDA924512F5C007CA928 /* EGPlayerControlView.swift in Sources */,
 				7679FDA524512AE7007CA928 /* DisplayerLayer.swift in Sources */,
 				7679FD7224504B55007CA928 /* AppDelegate.swift in Sources */,
+				840986BF24515D4800BD7760 /* EGSliderView.swift in Sources */,
 				7679FDA324512A90007CA928 /* EGPlayer.swift in Sources */,
 				7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */,
 			);
