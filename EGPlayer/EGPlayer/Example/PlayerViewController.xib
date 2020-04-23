@@ -45,14 +45,23 @@
                         </button>
                     </subviews>
                 </stackView>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lpY-b0-Jl2">
+                    <rect key="frame" x="18" y="576" width="378" height="31"/>
+                    <connections>
+                        <action selector="valueChanged:" destination="-1" eventType="valueChanged" id="GBv-L4-LvC"/>
+                    </connections>
+                </slider>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="lpY-b0-Jl2" firstAttribute="top" secondItem="fKy-iD-18C" secondAttribute="bottom" constant="45" id="9s2-H0-lCk"/>
+                <constraint firstItem="lpY-b0-Jl2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="AgG-IJ-WxA"/>
                 <constraint firstItem="PAV-0T-tGs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Enp-yf-tgu"/>
                 <constraint firstItem="fKy-iD-18C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="H09-MC-ZlZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fKy-iD-18C" secondAttribute="trailing" constant="20" id="Jy6-Ta-BHi"/>
                 <constraint firstItem="PAV-0T-tGs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="cL0-PQ-iat"/>
                 <constraint firstItem="fKy-iD-18C" firstAttribute="top" secondItem="PAV-0T-tGs" secondAttribute="bottom" constant="224" id="gss-gd-Fn3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lpY-b0-Jl2" secondAttribute="trailing" constant="20" id="nDn-ws-PYg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PAV-0T-tGs" secondAttribute="trailing" id="nmU-CB-SzG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

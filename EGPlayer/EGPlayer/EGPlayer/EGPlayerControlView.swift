@@ -130,14 +130,15 @@ extension EGPlayerControlView {
     func playDidCanPlay() {
         hideAllControlView()
     }
-    
+
+    func playerDidChangedState(_ state: EGPlayer.State) {
+        print(state)
+    }
+
     func setCacheProgress(_ progress: Double) {
     }
 
     func setPlayTime(_ time: Double, total: Double) {
-    }
-
-    func playStatueDidChanged() {
     }
 }
 
