@@ -12,15 +12,18 @@ import AVFoundation
 class EGPlayer {
     let player = AVPlayer()
 
-    var displayView = DisplayerLayer()
+    var displayView: DisplayerLayer!
 
-    init(controlView: UIView & PlayerControlable) {
-        controlView.translatesAutoresizingMaskIntoConstraints = false
-        displayView.addSubview(controlView)
-        controlView.topAnchor.constraint(equalTo: displayView.topAnchor).isActive = true
-        controlView.leftAnchor.constraint(equalTo: displayView.leftAnchor).isActive = true
-        controlView.rightAnchor.constraint(equalTo: displayView.rightAnchor).isActive = true
-        controlView.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
+    init<V: UIView>(controlView: V) where V: PlayerControlable {
+        displayView = DisplayerLayer()
+        controlView.player = player
+        layoutControl(controlView)
+    }
+
+    init<V: UIView>(displayView: DisplayerLayer, controlView: V) where V: PlayerControlable {
+        self.displayView = displayView
+        controlView.player = player
+        layoutControl(controlView)
     }
 
     /// 播放
@@ -35,5 +38,16 @@ class EGPlayer {
         guard let url = URL(string: url) else { return }
         let item = AVPlayerItem(url: url)
         player.replaceCurrentItem(with: item)
+    }
+}
+
+extension EGPlayer {
+    func layoutControl(_ view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        displayView.addSubview(view)
+        view.topAnchor.constraint(equalTo: displayView.topAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo: displayView.leftAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo: displayView.rightAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
     }
 }

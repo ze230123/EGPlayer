@@ -9,6 +9,6 @@
 import UIKit
 import AVFoundation
 
-protocol PlayerControlable {
+protocol PlayerControlable: class {
     var player: AVPlayer? { get set }
 }
