@@ -52,6 +52,16 @@
                         <action selector="valueChanged:" destination="-1" eventType="valueChanged" id="GBv-L4-LvC"/>
                     </connections>
                 </slider>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MW-b5-7TP">
+                    <rect key="frame" x="364" y="822" width="30" height="30"/>
+                    <state key="normal" title="full"/>
+                    <state key="selected">
+                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="fullAction:" destination="-1" eventType="touchUpInside" id="BaB-He-SDf"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
@@ -60,9 +70,11 @@
                 <constraint firstItem="PAV-0T-tGs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Enp-yf-tgu"/>
                 <constraint firstItem="fKy-iD-18C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="H09-MC-ZlZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fKy-iD-18C" secondAttribute="trailing" constant="20" id="Jy6-Ta-BHi"/>
+                <constraint firstItem="5MW-b5-7TP" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-10" id="STP-31-qzV"/>
                 <constraint firstItem="PAV-0T-tGs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="cL0-PQ-iat"/>
                 <constraint firstItem="fKy-iD-18C" firstAttribute="top" secondItem="PAV-0T-tGs" secondAttribute="bottom" constant="224" id="gss-gd-Fn3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lpY-b0-Jl2" secondAttribute="trailing" constant="20" id="nDn-ws-PYg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5MW-b5-7TP" secondAttribute="trailing" constant="20" id="ni5-8Z-bNy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PAV-0T-tGs" secondAttribute="trailing" id="nmU-CB-SzG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
