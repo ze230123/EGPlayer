@@ -18,20 +18,24 @@ class EGPlayer {
         displayView = DisplayerLayer()
         controlView.player = player
         layoutControl(controlView)
+        prepare()
     }
 
     init<V: UIView>(displayView: DisplayerLayer, controlView: V) where V: PlayerControlable {
         self.displayView = displayView
         controlView.player = player
         layoutControl(controlView)
+        prepare()
     }
 
     /// 播放
     func play() {
+        player.play()
     }
 
     /// 暂停
     func pause() {
+        player.pause()
     }
 
     func setUrl(_ url: String) {
@@ -49,5 +53,9 @@ extension EGPlayer {
         view.leftAnchor.constraint(equalTo: displayView.leftAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: displayView.rightAnchor).isActive = true
         view.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
+    }
+
+    func prepare() {
+        displayView.setPlayer(player)
     }
 }

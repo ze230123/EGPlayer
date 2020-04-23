@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import AVFoundation
 
-class EGPlayerControlView: UIView {
-    
+class EGPlayerControlView: UIView, PlayerControlable {
+
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var backButton: UIButton!
     
@@ -20,6 +21,9 @@ class EGPlayerControlView: UIView {
     @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var allTimeLabel: UILabel!
     @IBOutlet weak var sliderView: UIView!
+
+weak var player: AVPlayer?
+
     
     static var nib: UINib? {
         return UINib(nibName: String(describing: self), bundle: nil)
@@ -29,5 +33,6 @@ class EGPlayerControlView: UIView {
         super.awakeFromNib()
  
     }
-    
+
 }
+    
