@@ -15,6 +15,10 @@
 		7679FD7E24504B56007CA928 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7679FD7C24504B56007CA928 /* LaunchScreen.storyboard */; };
 		7679FD8924504B56007CA928 /* EGPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD8824504B56007CA928 /* EGPlayerTests.swift */; };
 		7679FD9424504B56007CA928 /* EGPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD9324504B56007CA928 /* EGPlayerUITests.swift */; };
+		7679FDA324512A90007CA928 /* EGPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FDA224512A90007CA928 /* EGPlayer.swift */; };
+		7679FDA524512AE7007CA928 /* DisplayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FDA424512AE7007CA928 /* DisplayerLayer.swift */; };
+		7679FDA724512D1A007CA928 /* PlayerControlable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FDA624512D1A007CA928 /* PlayerControlable.swift */; };
+		7679FDA924512F5C007CA928 /* EGPlayerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FDA824512F5C007CA928 /* EGPlayerControlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		7679FD8F24504B56007CA928 /* EGPlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EGPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7679FD9324504B56007CA928 /* EGPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayerUITests.swift; sourceTree = "<group>"; };
 		7679FD9524504B56007CA928 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7679FDA224512A90007CA928 /* EGPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayer.swift; sourceTree = "<group>"; };
+		7679FDA424512AE7007CA928 /* DisplayerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayerLayer.swift; sourceTree = "<group>"; };
+		7679FDA624512D1A007CA928 /* PlayerControlable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlable.swift; sourceTree = "<group>"; };
+		7679FDA824512F5C007CA928 /* EGPlayerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayerControlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,7 @@
 		7679FD7024504B55007CA928 /* EGPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				7679FDA124512A7F007CA928 /* EGPlayer */,
 				7679FD7124504B55007CA928 /* AppDelegate.swift */,
 				7679FD7324504B55007CA928 /* SceneDelegate.swift */,
 				7679FD7524504B55007CA928 /* ViewController.swift */,
@@ -126,6 +135,17 @@
 				7679FD9524504B56007CA928 /* Info.plist */,
 			);
 			path = EGPlayerUITests;
+			sourceTree = "<group>";
+		};
+		7679FDA124512A7F007CA928 /* EGPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				7679FDA224512A90007CA928 /* EGPlayer.swift */,
+				7679FDA424512AE7007CA928 /* DisplayerLayer.swift */,
+				7679FDA624512D1A007CA928 /* PlayerControlable.swift */,
+				7679FDA824512F5C007CA928 /* EGPlayerControlView.swift */,
+			);
+			path = EGPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7679FDA724512D1A007CA928 /* PlayerControlable.swift in Sources */,
 				7679FD7624504B55007CA928 /* ViewController.swift in Sources */,
+				7679FDA924512F5C007CA928 /* EGPlayerControlView.swift in Sources */,
+				7679FDA524512AE7007CA928 /* DisplayerLayer.swift in Sources */,
 				7679FD7224504B55007CA928 /* AppDelegate.swift in Sources */,
+				7679FDA324512A90007CA928 /* EGPlayer.swift in Sources */,
 				7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4WM659594V;
 				INFOPLIST_FILE = EGPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,6 +480,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4WM659594V;
 				INFOPLIST_FILE = EGPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
