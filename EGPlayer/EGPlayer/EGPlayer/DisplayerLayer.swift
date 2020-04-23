@@ -11,15 +11,6 @@ import AVFoundation
 
 /// 显示画面View
 class DisplayerLayer: UIView {
-//    var player: AVPlayer? {
-//        get {
-//            return playerLayer.player
-//        }
-//        set {
-//            playerLayer.player = newValue
-//        }
-//    }
-
     var playerLayer: AVPlayerLayer {
         return layer as! AVPlayerLayer
     }
@@ -30,5 +21,6 @@ class DisplayerLayer: UIView {
 
     func setPlayer(_ player: AVPlayer) {
         playerLayer.player = player
+        playerLayer.videoGravity = .resizeAspectFill
     }
 }

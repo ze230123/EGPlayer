@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
 
-class EGPlayerControlView: UIView {
+class EGPlayerControlView: UIView, PlayerControlable {
+    weak var player: AVPlayer?
 }
