@@ -11,6 +11,9 @@ import AVFoundation
 
 /// 显示画面View
 class DisplayerLayer: UIView {
+    var parentView: UIView?
+    var tempFrame: CGRect = .zero
+
     var playerLayer: AVPlayerLayer {
         return layer as! AVPlayerLayer
     }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		766D947C24527F840037F0EC /* EGOrientationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766D947B24527F840037F0EC /* EGOrientationObserver.swift */; };
+		766D947E245294070037F0EC /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766D947D245294070037F0EC /* NavigationViewController.swift */; };
+		766D9481245296670037F0EC /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766D947F245296670037F0EC /* FullScreenViewController.swift */; };
+		766D9482245296670037F0EC /* FullScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 766D9480245296670037F0EC /* FullScreenViewController.xib */; };
 		7679FD7224504B55007CA928 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD7124504B55007CA928 /* AppDelegate.swift */; };
 		7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD7324504B55007CA928 /* SceneDelegate.swift */; };
 		7679FD7624504B55007CA928 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD7524504B55007CA928 /* ViewController.swift */; };
@@ -46,6 +49,9 @@
 
 /* Begin PBXFileReference section */
 		766D947B24527F840037F0EC /* EGOrientationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGOrientationObserver.swift; sourceTree = "<group>"; };
+		766D947D245294070037F0EC /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		766D947F245296670037F0EC /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
+		766D9480245296670037F0EC /* FullScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FullScreenViewController.xib; sourceTree = "<group>"; };
 		7679FD6E24504B55007CA928 /* EGPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7679FD7124504B55007CA928 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7679FD7324504B55007CA928 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +134,7 @@
 				7679FD7A24504B56007CA928 /* Assets.xcassets */,
 				7679FD7C24504B56007CA928 /* LaunchScreen.storyboard */,
 				7679FD7F24504B56007CA928 /* Info.plist */,
+				766D947D245294070037F0EC /* NavigationViewController.swift */,
 			);
 			path = EGPlayer;
 			sourceTree = "<group>";
@@ -170,6 +177,8 @@
 			children = (
 				7679FDAB24513751007CA928 /* PlayerViewController.swift */,
 				7679FDAC24513751007CA928 /* PlayerViewController.xib */,
+				766D947F245296670037F0EC /* FullScreenViewController.swift */,
+				766D9480245296670037F0EC /* FullScreenViewController.xib */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -280,6 +289,7 @@
 			files = (
 				7679FD7E24504B56007CA928 /* LaunchScreen.storyboard in Resources */,
 				840986BD2451387C00BD7760 /* EGPlayerControlView.xib in Resources */,
+				766D9482245296670037F0EC /* FullScreenViewController.xib in Resources */,
 				7679FDAE24513751007CA928 /* PlayerViewController.xib in Resources */,
 				840986C124515D6000BD7760 /* EGSliderView.xib in Resources */,
 				7679FD7B24504B56007CA928 /* Assets.xcassets in Resources */,
@@ -309,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7679FDA724512D1A007CA928 /* PlayerControlable.swift in Sources */,
+				766D947E245294070037F0EC /* NavigationViewController.swift in Sources */,
 				7679FDAD24513751007CA928 /* PlayerViewController.swift in Sources */,
 				7679FD7624504B55007CA928 /* ViewController.swift in Sources */,
 				7679FDA924512F5C007CA928 /* EGPlayerControlView.swift in Sources */,
@@ -318,6 +329,7 @@
 				7679FDA324512A90007CA928 /* EGPlayer.swift in Sources */,
 				766D947C24527F840037F0EC /* EGOrientationObserver.swift in Sources */,
 				7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */,
+				766D9481245296670037F0EC /* FullScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
