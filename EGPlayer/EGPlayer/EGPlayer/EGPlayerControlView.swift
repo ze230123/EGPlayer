@@ -31,29 +31,39 @@ class EGPlayerControlView: UIView, NibLoadable, PlayerControlable {
     
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     weak var player: AVPlayer?
+    var backButtonBlock: (() -> Void)?
     
-    var totalTime: TimeInterval {
-        return CMTimeGetSeconds(self.player?.currentItem?.duration ?? CMTime.zero)
+    var totalTime: Double {
+        return self.player?.currentItem?.duration.seconds ?? 0
     }
     
-    var currentTime: TimeInterval {
-        return CMTimeGetSeconds(self.player?.currentItem?.currentTime() ?? CMTime.zero)
+    var currentTime: Double {
+        return self.player?.currentItem?.currentTime().seconds ?? 0
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         initViewFromNib()
+        initSubViews()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initViewFromNib()
+        initSubViews()
+
     }
     
     func initSubViews() {
-        self.allTimeLabel.text = convertTimeSecond(timeSecond: Int(self.totalTime))
+        addSubviewActions()
+        self.sliderView.value = 0
+        self.sliderView.bufferValue = 0
+        self.sliderView.delegate = self
     }
     
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.backButtonBlock?()
+    }
 }
 
 ///竖屏方法
@@ -146,6 +156,7 @@ extension EGPlayerControlView {
     
     /// 视频可以播放
     func playDidCanPlay() {
+
     }
 
     func playerDidChangedState(_ state: EGPlayer.State) {
@@ -178,6 +189,8 @@ extension EGPlayerControlView {
     func setPlayTime(_ time: Double, total: Double) {
         self.currentTimeLabel.text = convertTimeSecond(timeSecond: Int(time))
         self.sliderView.value = CGFloat(time / total)
+        self.allTimeLabel.text = convertTimeSecond(timeSecond: Int(total))
+        
     }
 }
 extension EGPlayerControlView: EGSliderViewDelegate {

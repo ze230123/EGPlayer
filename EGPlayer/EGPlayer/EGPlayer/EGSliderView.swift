@@ -46,7 +46,7 @@ class EGSliderView: UIView, NibLoadable {
     var value: CGFloat = 0 {
         
         didSet{
-            sliderWidth.constant = value * self.bounds.width
+            sliderWidth.constant = value * (self.bounds.width - self.sliderView.bounds.width)
         }
     }
     
@@ -74,6 +74,10 @@ class EGSliderView: UIView, NibLoadable {
     
     // MARK: - User action
     func addOtherActions() {
+        
+        self.sliderView.layer.cornerRadius = 7
+        
+        
         // 添加点击手势
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tapped(_ :)))
         self.addGestureRecognizer(tapGesture)
@@ -126,7 +130,7 @@ class EGSliderView: UIView, NibLoadable {
     
     private func sliderBtnDragMoving(view: UIView, touchpoint: CGPoint) {
         let point = touchpoint
-        var value = point.x - view.bounds.width * 0.5 / bgProgressView.bounds.width
+        var value = (point.x - view.bounds.width * 0.5) / bgProgressView.bounds.width
         value = value > 1.0 ? 1.0 : value <= 0.0 ? 0.0 : value
         if self.value == value {
             return
