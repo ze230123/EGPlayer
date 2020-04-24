@@ -117,7 +117,7 @@ extension EGPlayer {
         addPlayerNotification()
 
         /// 播放时间
-        let interval = CMTime(seconds: 1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        let interval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [unowned self] (time) in
             let currentTime = time.seconds
             let totalTime = self.player.currentItem?.duration.seconds ?? 0
