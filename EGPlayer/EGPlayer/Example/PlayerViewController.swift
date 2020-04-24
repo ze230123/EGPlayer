@@ -29,7 +29,7 @@ class PlayerViewController: UIViewController {
 
         let url = "http://tb-video.bdstatic.com/tieba-smallvideo-transcode/3612804_e50cb68f52adb3c4c3f6135c0edcc7b0_3.mp4"
         player.setUrl(url)
-        controlView.backButtonBlock = { [weak self] in
+        controlView.backBtnClickCallback = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
     }

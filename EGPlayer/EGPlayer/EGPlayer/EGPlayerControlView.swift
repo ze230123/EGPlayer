@@ -9,29 +9,25 @@
 import UIKit
 import AVFoundation
 
-class EGPlayerControlView: UIView, NibLoadable, PlayerControlable {
-
-    /// 顶部工具栏
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var backButton: UIButton!
-
-    /// 底部工具栏
-    @IBOutlet weak var bottomView: UIView!
-    /// 播放或暂停按钮
-    @IBOutlet weak var playerButton: UIButton!
-
-    /// 播放的当前时间
-    @IBOutlet weak var currentTimeLabel: UILabel!
-    /// 全屏按钮
-    @IBOutlet weak var showButton: UIButton!
-    /// 视频总时间
-    @IBOutlet weak var allTimeLabel: UILabel!
-    /// 滑杆
-    @IBOutlet weak var sliderView: EGSliderView!
+class EGPlayerControlView: UIView, PlayerControlable {
     
-    @IBOutlet weak var loadingView: UIActivityIndicatorView!
-    weak var player: AVPlayer?
-    var backButtonBlock: (() -> Void)?
+     var player: AVPlayer? {
+        didSet {
+            self.portraitControlView.player = self.player
+            self.landScapeControlView.player = self.player
+        }
+    }
+    
+    var backBtnClickCallback: (() -> Void)?
+    /// 控制层显示或者隐藏
+    var controlViewAppeared: Bool = false
+    
+    
+    ///监听是否横屏竖屏
+    var isFullScreen: Bool = false
+//    {
+//        return false
+//    }
     
     var totalTime: Double {
         return self.player?.currentItem?.duration.seconds ?? 0
@@ -40,89 +36,115 @@ class EGPlayerControlView: UIView, NibLoadable, PlayerControlable {
     var currentTime: Double {
         return self.player?.currentItem?.currentTime().seconds ?? 0
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initViewFromNib()
         initSubViews()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        initViewFromNib()
         initSubViews()
-
+        
     }
     
     func initSubViews() {
-        addSubviewActions()
-        self.sliderView.value = 0
-        self.sliderView.bufferValue = 0
-        self.sliderView.delegate = self
+        self.backgroundColor = .clear
+        
+        self.portraitControlView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(portraitControlView)
+        portraitControlView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        portraitControlView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        portraitControlView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        portraitControlView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        
+        self.landScapeControlView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(landScapeControlView)
+        landScapeControlView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        landScapeControlView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        landScapeControlView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        landScapeControlView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        addSubview(self.loadingView)
     }
     
-    @IBAction func backButtonAction(_ sender: Any) {
-        self.backButtonBlock?()
-    }
-}
-
-///竖屏方法
-extension EGPlayerControlView {
-     private func addSubviewActions() {
-         self.playerButton.addTarget(self, action: #selector(playPauseButtonClickAction), for: .touchUpInside)
-         self.showButton.addTarget(self, action: #selector(fullScreenButtonClickAction), for: .touchUpInside)
-     }
-     
-    @objc func playPauseButtonClickAction() {
-        playOrPause()
-     }
-     
-    @objc func fullScreenButtonClickAction() {
-         
-     }
-     
-     func showControlView() {
-         topView.alpha = 1
-         bottomView.alpha = 1
-     }
-     
-     func hideControlView() {
-         topView.alpha = 0
-         bottomView.alpha = 0
-     }
-     
-     func playOrPause() {
-         self.playerButton.isSelected = !self.playerButton.isSelected
-         self.playerButton.isSelected ? self.player?.play() : self.player?.pause()
-     }
-     
-     func convertTimeSecond(timeSecond: Int) -> String {
-         var lastTime = ""
-         if timeSecond < 60 {
-             lastTime = NSString(format: "00:%02zd", timeSecond) as String
-         } else if timeSecond >= 60 && timeSecond < 3600 {
-             lastTime = NSString(format: "%02zd:%02zd", timeSecond / 60, timeSecond % 60) as String
-         } else {
-             lastTime = NSString(format: "%02zd:%02zd:%02zd", timeSecond / 3600, timeSecond % 3600 / 60, timeSecond % 60) as String
-         }
-         return lastTime
-     }
+    // MARK: - lazy Load
+    
+    ///竖屏view
+    lazy var portraitControlView: EGPortraitControlView = {
+        let portraitControlView = EGPortraitControlView()
+        portraitControlView.isHidden = false
+        portraitControlView.backButtonActionBlock = {[weak self] in
+            self?.backBtnClickCallback?()
+        }
+        portraitControlView.showButtonActionBlock = {[weak self] in
+            self?.setControlViewOrientation(true)
+        }
+        return portraitControlView
+    }()
+    
+    ///横屏view
+    lazy var landScapeControlView: EGLandScapeControlView = {
+        let landScapeControlView = EGLandScapeControlView()
+        landScapeControlView.isHidden = true
+        landScapeControlView.backButtonActionBlock = {[weak self] in
+            
+        }
+        landScapeControlView.showButtonActionBlock = {[weak self] in
+            
+        }
+        
+        return landScapeControlView
+    }()
+    
+    lazy var loadingView: UIActivityIndicatorView = {
+        let loadingView = UIActivityIndicatorView()
+        loadingView.center = self.center
+        loadingView.isHidden = true
+        loadingView.style = .gray
+        return loadingView
+    }()
 }
 
 /// controlView 方法
 extension EGPlayerControlView {
     
+    func setControlViewOrientation(_ fullScreen: Bool) {
+        
+        self.isFullScreen = fullScreen
+        self.portraitControlView.isHidden = fullScreen
+        self.landScapeControlView.isHidden = !fullScreen
+        if self.controlViewAppeared {
+            self.showAllControlViewWithAnimated(false)
+        } else {
+            self.hideAllControlViewWithAnimated(false)
+        }
+    }
+    
+    ///隐藏控制层
     func hideAllControlViewWithAnimated(_ animated: Bool) {
+        controlViewAppeared = false
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
-            self.hideControlView()
+            if self.isFullScreen {
+                self.landScapeControlView.hideControlView()
+            } else {
+                self.portraitControlView.hideControlView()
+            }
         }) { (finished) in
             print(finished)
         }
     }
     
     func showAllControlViewWithAnimated(_ animated: Bool) {
+        controlViewAppeared = true
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
-            self.showControlView()
+            if self.isFullScreen {
+                self.landScapeControlView.showControlView()
+            } else {
+                self.portraitControlView.showControlView()
+            }
+            
         }) { (finished) in
             print(finished)
         }
@@ -156,95 +178,48 @@ extension EGPlayerControlView {
     
     /// 视频可以播放
     func playDidCanPlay() {
-
+        stopAnimating()
     }
-
+    
     func playerDidChangedState(_ state: EGPlayer.State) {
         
         switch state {
         case.loading:
             startAnimating()
-        case .readyToPlay:
-            hideAllControlViewWithAnimated(true)
         case .playing:
-            playerButton.isSelected = true
+            self.portraitControlView.playBtnSelectedState(true)
+            self.landScapeControlView.playBtnSelectedState(true)
             stopAnimating()
         case .paused, .playEnd:
-            playerButton.isSelected = false
+            self.portraitControlView.playBtnSelectedState(false)
+            self.landScapeControlView.playBtnSelectedState(false)
         case .cacheing:
             startAnimating()
         case .failed(let error):
             print(error)
-            playerButton.isSelected = false
+            self.portraitControlView.playBtnSelectedState(false)
+            self.landScapeControlView.playBtnSelectedState(false)
             stopAnimating()
             
+        case .readyToPlay:
+            print("readyToPlay")
         }
         
     }
-
+    
     func setCacheProgress(_ progress: Double) {
-        self.sliderView.bufferValue = CGFloat(progress)
-    }
-
-    func setPlayTime(_ time: Double, total: Double) {
-        self.currentTimeLabel.text = convertTimeSecond(timeSecond: Int(time))
-        self.sliderView.value = CGFloat(time / total)
-        self.allTimeLabel.text = convertTimeSecond(timeSecond: Int(total))
+        self.portraitControlView.sliderView.bufferValue = CGFloat(progress)
+        self.landScapeControlView.sliderView.bufferValue = CGFloat(progress)
         
     }
+    
+    func setPlayTime(_ time: Double, total: Double) {
+        self.portraitControlView.currentTime = time
+        self.portraitControlView.totalTime = total
+        self.portraitControlView.sliderView.value = CGFloat(time / total)
+        
+        self.landScapeControlView.currentTime = time
+        self.landScapeControlView.totalTime = total
+        self.landScapeControlView.sliderView.value = CGFloat(time / total)
+    }
 }
-extension EGPlayerControlView: EGSliderViewDelegate {
-    
-    func sliderTouchBegan(value: TimeInterval) {
-        self.sliderView.isdragging = true
-    }
-    
-    func sliderTouchEnded(value: TimeInterval) {
-        if totalTime > 0 {
-            self.player?.seek(to: CMTimeMakeWithSeconds(value * totalTime, preferredTimescale: Int32(NSEC_PER_SEC)), completionHandler: { [weak self] (finished) in
-                if finished {
-                    self?.sliderView.isdragging = false
-                }
-            })
-        } else {
-            self.sliderView.isdragging = false
-        }
-
-    }
-    
-    
-    func sliderValueChanged(value: TimeInterval) {
-
-        if totalTime == 0 {
-            self.sliderView.value = 0
-            return
-        }
-        guard totalTime != 0 else {
-            self.sliderView.value = 0
-            return
-        }
-        self.sliderView.isdragging = true
-        let currentTimeString = convertTimeSecond(timeSecond: Int(totalTime * value))
-        self.currentTimeLabel.text = currentTimeString
-    }
-    
-
-    
-    func sliderTapped(value: TimeInterval) {
-        if totalTime > 0 {
-            self.sliderView.isdragging = true
-            self.player?.seek(to: CMTimeMakeWithSeconds(value * totalTime, preferredTimescale: Int32(NSEC_PER_SEC)), completionHandler: { [weak self] (finished) in
-                if finished {
-                    self?.sliderView.isdragging = false
-                    self?.player?.play()
-                }
-            })
-        } else {
-            self.sliderView.isdragging = false
-            self.sliderView.value = 0
-        }
-    }
-    
-    
-}
-    
