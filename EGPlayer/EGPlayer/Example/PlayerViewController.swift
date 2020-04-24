@@ -46,10 +46,28 @@ class PlayerViewController: UIViewController {
         if sender.isSelected {
             setIntface(.portrait)
         } else {
-            setIntface(.landscapeRight)
+//            setIntface(.landscapeRight)
+            enterFull(true)
         }
 
         sender.isSelected = !sender.isSelected
+    }
+
+    func enterFull(_ isFull: Bool) {
+        if isFull {
+            let window = UIApplication.shared.keyWindow
+            let disView = player.displayView
+
+            window?.addSubview(displayView)
+
+            UIView.animate(withDuration: 0.3) {
+                disView?.frame = window?.bounds ?? .zero
+                self.setIntface(.landscapeRight)
+                disView?.layoutIfNeeded()
+            }
+        } else {
+            
+        }
     }
 
     // TODO: 屏幕旋转：1、手动将设备旋转，2、监听系统通知当发生旋转时自动更新布局(2暂时不需要)

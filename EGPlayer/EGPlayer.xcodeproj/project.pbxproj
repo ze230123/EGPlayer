@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		766D947C24527F840037F0EC /* EGOrientationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766D947B24527F840037F0EC /* EGOrientationObserver.swift */; };
 		7679FD7224504B55007CA928 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD7124504B55007CA928 /* AppDelegate.swift */; };
 		7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD7324504B55007CA928 /* SceneDelegate.swift */; };
 		7679FD7624504B55007CA928 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD7524504B55007CA928 /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		766D947B24527F840037F0EC /* EGOrientationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGOrientationObserver.swift; sourceTree = "<group>"; };
 		7679FD6E24504B55007CA928 /* EGPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7679FD7124504B55007CA928 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7679FD7324504B55007CA928 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				840986C42452827C00BD7760 /* EGLandScapeControlView.xib */,
 				840986BE24515D4800BD7760 /* EGSliderView.swift */,
 				840986C024515D6000BD7760 /* EGSliderView.xib */,
+				766D947B24527F840037F0EC /* EGOrientationObserver.swift */,
 			);
 			path = EGPlayer;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				840986C32452826700BD7760 /* EGLandScapeControlView.swift in Sources */,
 				840986BF24515D4800BD7760 /* EGSliderView.swift in Sources */,
 				7679FDA324512A90007CA928 /* EGPlayer.swift in Sources */,
+				766D947C24527F840037F0EC /* EGOrientationObserver.swift in Sources */,
 				7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
