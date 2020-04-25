@@ -21,6 +21,22 @@ class PlayerViewController: UIViewController {
         print("PlayerViewController_deinit")
     }
 
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+
+    override var shouldAutorotate: Bool {
+        return true
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.landscapeRight, .portrait]
+    }
+
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
@@ -43,39 +59,13 @@ class PlayerViewController: UIViewController {
     }
 
     @IBAction func fullAction(_ sender: UIButton) {
-        if sender.isSelected {
-            setIntface(.portrait)
-        } else {
-//            setIntface(.landscapeRight)
-            enterFull(true)
-        }
+//        let vc = UIViewController()
+//        vc.view.backgroundColor = .white
+//        vc.modalPresentationStyle = .fullScreen
+        let vc = FullScreenViewController(view: displayView)
+        present(vc, animated: true, completion: nil)
 
         sender.isSelected = !sender.isSelected
-    }
-
-    func enterFull(_ isFull: Bool) {
-        if isFull {
-            let window = UIApplication.shared.keyWindow
-            let disView = player.displayView
-
-            window?.addSubview(displayView)
-
-            UIView.animate(withDuration: 0.3) {
-                disView?.frame = window?.bounds ?? .zero
-                self.setIntface(.landscapeRight)
-                disView?.layoutIfNeeded()
-            }
-        } else {
-            
-        }
-    }
-
-    // TODO: 屏幕旋转：1、手动将设备旋转，2、监听系统通知当发生旋转时自动更新布局(2暂时不需要)
-    func setIntface(_ orientation: UIInterfaceOrientation) {
-        UIView.animate(withDuration: 0.5) {
-            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
-            self.view.setNeedsLayout()
-        }
     }
 
     @IBAction func valueChanged(_ sender: UISlider) {

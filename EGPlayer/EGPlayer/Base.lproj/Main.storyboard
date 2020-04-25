@@ -37,10 +37,10 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="EHY-kx-0Ui">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g8k-Q3-ix9" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g8k-Q3-ix9" customClass="NavigationViewController" customModule="EGPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mjD-aX-FPv">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

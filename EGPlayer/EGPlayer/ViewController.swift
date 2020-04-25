@@ -18,6 +18,14 @@ class ViewController: UIViewController {
         let vc = PlayerViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
 }
 
 
