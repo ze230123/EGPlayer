@@ -28,6 +28,7 @@
 		840986C52452827C00BD7760 /* EGLandScapeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840986C42452827C00BD7760 /* EGLandScapeControlView.xib */; };
 		840986C824528DC700BD7760 /* EGPortraitControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840986C624528DC600BD7760 /* EGPortraitControlView.xib */; };
 		840986C924528DC700BD7760 /* EGPortraitControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986C724528DC600BD7760 /* EGPortraitControlView.swift */; };
+		840986CB2452ED5E00BD7760 /* EGPlayerGestureControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		840986C42452827C00BD7760 /* EGLandScapeControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EGLandScapeControlView.xib; sourceTree = "<group>"; };
 		840986C624528DC600BD7760 /* EGPortraitControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EGPortraitControlView.xib; sourceTree = "<group>"; };
 		840986C724528DC600BD7760 /* EGPortraitControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGPortraitControlView.swift; sourceTree = "<group>"; };
+		840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayerGestureControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				840986BE24515D4800BD7760 /* EGSliderView.swift */,
 				840986C024515D6000BD7760 /* EGSliderView.xib */,
 				766D947B24527F840037F0EC /* EGOrientationObserver.swift */,
+				840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */,
 			);
 			path = EGPlayer;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				7679FDA924512F5C007CA928 /* EGPlayerControlView.swift in Sources */,
 				7679FDA524512AE7007CA928 /* DisplayerLayer.swift in Sources */,
 				7679FD7224504B55007CA928 /* AppDelegate.swift in Sources */,
+				840986CB2452ED5E00BD7760 /* EGPlayerGestureControl.swift in Sources */,
 				840986C924528DC700BD7760 /* EGPortraitControlView.swift in Sources */,
 				840986C32452826700BD7760 /* EGLandScapeControlView.swift in Sources */,
 				840986BF24515D4800BD7760 /* EGSliderView.swift in Sources */,
