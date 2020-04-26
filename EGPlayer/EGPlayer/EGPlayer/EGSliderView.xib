@@ -11,11 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EGSliderView" customModule="EGPlayer" customModuleProvider="target">
             <connections>
                 <outlet property="bgProgressView" destination="zX1-og-EM5" id="d5J-9E-ueV"/>
-                <outlet property="bufferProgressView" destination="x3m-0G-rVA" id="pJb-z4-ssD"/>
-                <outlet property="bufferWith" destination="Npb-gv-8NJ" id="Xkw-hW-J8J"/>
-                <outlet property="sliderProgressView" destination="aAR-pZ-a8G" id="D6U-qt-9zS"/>
-                <outlet property="sliderView" destination="ELL-5g-AI3" id="hhI-Ia-vp6"/>
-                <outlet property="sliderWidth" destination="zoU-PC-yZh" id="5ys-gM-SHx"/>
+                <outlet property="bufferWith" destination="6Vr-c0-qRP" id="cbQ-d7-7I3"/>
+                <outlet property="progress" destination="EsY-Ul-Frs" id="94n-bC-YH3"/>
+                <outlet property="sliderView" destination="CrM-4z-9Xb" id="AgB-cb-1hc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,71 +29,34 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="vCN-bc-mk1"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3m-0G-rVA">
-                    <rect key="frame" x="0.0" y="4.5" width="150" height="1.5"/>
-                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1.5" id="4T0-Gb-Ifl"/>
-                        <constraint firstAttribute="width" constant="150" id="Npb-gv-8NJ"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="nBo-jt-wJ3"/>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZF-91-vqG">
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="EsY-Ul-Frs">
                     <rect key="frame" x="0.0" y="4.5" width="200" height="1.5"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jg-5C-zdh">
-                            <rect key="frame" x="0.0" y="0.0" width="7" height="1.5"/>
-                            <color key="backgroundColor" red="0.93725490199999995" green="0.23921568630000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="7" id="CI7-Y9-oZC"/>
-                                <constraint firstAttribute="height" constant="1.5" id="CuW-bm-jbY"/>
-                            </constraints>
-                            <viewLayoutGuide key="safeArea" id="Dj0-kD-QBe"/>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAR-pZ-a8G">
-                            <rect key="frame" x="7" y="0.0" width="100" height="1.5"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELL-5g-AI3">
-                                    <rect key="frame" x="86" y="-6.5" width="14" height="14"/>
-                                    <color key="backgroundColor" red="0.9137254901960784" green="0.18823529411764706" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="14" id="QSV-VR-4Tb"/>
-                                        <constraint firstAttribute="height" constant="14" id="j7o-mE-RQ8"/>
-                                    </constraints>
-                                    <viewLayoutGuide key="safeArea" id="yTm-Hp-3ci"/>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" red="0.93725490196078431" green="0.23921568627450979" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstItem="ELL-5g-AI3" firstAttribute="centerY" secondItem="aAR-pZ-a8G" secondAttribute="centerY" id="ORS-Zv-8TL"/>
-                                <constraint firstAttribute="trailing" secondItem="ELL-5g-AI3" secondAttribute="trailing" id="SmH-Gn-Jwz"/>
-                                <constraint firstAttribute="height" constant="1.5" id="Zpj-vK-1id"/>
-                                <constraint firstAttribute="width" constant="100" id="zoU-PC-yZh"/>
-                            </constraints>
-                            <viewLayoutGuide key="safeArea" id="cyT-Ia-odD"/>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="aAR-pZ-a8G" firstAttribute="centerY" secondItem="0Jg-5C-zdh" secondAttribute="centerY" id="2f2-v9-hDx"/>
-                        <constraint firstItem="0Jg-5C-zdh" firstAttribute="leading" secondItem="lZF-91-vqG" secondAttribute="leading" id="Msr-1R-mvV"/>
-                        <constraint firstAttribute="height" constant="1.5" id="Mw4-1a-opF"/>
-                        <constraint firstItem="aAR-pZ-a8G" firstAttribute="leading" secondItem="lZF-91-vqG" secondAttribute="leading" constant="7" id="SLG-qJ-PLm"/>
-                        <constraint firstItem="0Jg-5C-zdh" firstAttribute="centerY" secondItem="lZF-91-vqG" secondAttribute="centerY" id="Z1s-a4-xAF"/>
+                        <constraint firstAttribute="height" constant="1.5" id="GT8-u4-5b5"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="VlZ-oj-U9N"/>
-                </view>
+                    <color key="progressTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </progressView>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="CrM-4z-9Xb">
+                    <rect key="frame" x="-2" y="4.5" width="204" height="2.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="6Vr-c0-qRP"/>
+                        <constraint firstAttribute="height" constant="1.5" id="cSY-lA-8vt"/>
+                    </constraints>
+                    <color key="minimumTrackTintColor" red="0.93725490196078431" green="0.23921568627450979" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="maximumTrackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </slider>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="zX1-og-EM5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5Qc-by-D6g"/>
-                <constraint firstItem="lZF-91-vqG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="64v-7z-W1F"/>
+                <constraint firstAttribute="trailing" secondItem="EsY-Ul-Frs" secondAttribute="trailing" id="HwJ-aT-XCu"/>
                 <constraint firstItem="zX1-og-EM5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JVV-jj-c4v"/>
-                <constraint firstItem="x3m-0G-rVA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KcW-aE-sIz"/>
                 <constraint firstAttribute="trailing" secondItem="zX1-og-EM5" secondAttribute="trailing" id="XNl-Xs-j48"/>
-                <constraint firstItem="lZF-91-vqG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oT7-Ig-sBY"/>
-                <constraint firstAttribute="trailing" secondItem="lZF-91-vqG" secondAttribute="trailing" id="yhX-l8-eZD"/>
-                <constraint firstItem="x3m-0G-rVA" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zvn-K1-JnU"/>
+                <constraint firstItem="CrM-4z-9Xb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZX4-yo-LgV"/>
+                <constraint firstItem="EsY-Ul-Frs" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kh3-xx-fQY"/>
+                <constraint firstItem="CrM-4z-9Xb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="xM9-sR-f9x"/>
+                <constraint firstItem="EsY-Ul-Frs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yTa-Gt-pO7"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

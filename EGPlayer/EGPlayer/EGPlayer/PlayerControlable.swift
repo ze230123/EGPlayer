@@ -14,7 +14,7 @@ protocol PlayerControlable: class {
     /// 播放状态改变
     func playerDidChangedState(_ state: EGPlayer.State)
     /// 设置缓冲进度
-    func setCacheProgress(_ progress: Double)
+    func setCacheProgress(_ progress: Double, total: Double)
     /// 设置播放时间，视频总时长
     func setPlayTime(_ time: Double, total: Double)
 }

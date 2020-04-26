@@ -210,19 +210,15 @@ extension EGPlayerControlView {
         
     }
     
-    func setCacheProgress(_ progress: Double) {
-        self.portraitControlView.sliderView.bufferValue = CGFloat(progress)
-        self.landScapeControlView.sliderView.bufferValue = CGFloat(progress)
-        
+    func setCacheProgress(_ progress: Double, total: Double) {
+        self.portraitControlView.setProgressAndTotalTime(progress, totalTime: total)
+        self.landScapeControlView.setProgressAndTotalTime(progress, totalTime: total)
+
     }
     
     func setPlayTime(_ time: Double, total: Double) {
-        self.portraitControlView.currentTime = time
-        self.portraitControlView.totalTime = total
-        self.portraitControlView.sliderView.value = CGFloat(time / total)
-        
-        self.landScapeControlView.currentTime = time
-        self.landScapeControlView.totalTime = total
-        self.landScapeControlView.sliderView.value = CGFloat(time / total)
+
+        self.portraitControlView.setCurrentTime(time)
+        self.landScapeControlView.setCurrentTime(time)
     }
 }

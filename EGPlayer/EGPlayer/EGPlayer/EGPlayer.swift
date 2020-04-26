@@ -80,7 +80,7 @@ extension EGPlayer {
             let durationSecound = timeRange.duration.seconds
             let cache = startSecounds + durationSecound
             let total = item.duration.seconds
-            self.controlView.setCacheProgress(cache / total)
+            self.controlView.setCacheProgress(cache / total, total: total)
         })
 
         timeControlStatusObser = player.observe(\.timeControlStatus) { [unowned self] (item, _) in

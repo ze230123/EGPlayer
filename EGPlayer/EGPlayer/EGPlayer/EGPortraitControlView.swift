@@ -16,7 +16,7 @@ class EGPortraitControlView: UIView, NibLoadable {
     @IBOutlet weak var backButton: UIButton!
     
     /// 底部工具栏
-    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomView: GradientView!
     /// 播放或暂停按钮
     @IBOutlet weak var playerButton: UIButton!
     
@@ -82,6 +82,18 @@ class EGPortraitControlView: UIView, NibLoadable {
 
 extension EGPortraitControlView {
 
+    func setCurrentTime(_ currentTime: Double) {
+        
+        self.currentTime = currentTime
+        self.sliderView.value = Float(currentTime)
+        self.sliderView.totalTime = Float(totalTime)
+    }
+    
+    func setProgressAndTotalTime(_ progress: Double, totalTime: Double) {
+        self.totalTime = totalTime
+        self.sliderView.bufferValue = CGFloat(progress)
+
+    }
     
     func showControlView() {
         topView.alpha = 1
@@ -119,13 +131,13 @@ extension EGPortraitControlView {
 
 extension EGPortraitControlView: EGSliderViewDelegate {
     
-    func sliderTouchBegan(value: TimeInterval) {
+    func sliderTouchBegan() {
         self.sliderView.isdragging = true
     }
     
-    func sliderTouchEnded(value: TimeInterval) {
+    func sliderTouchEnded(value: Double) {
         if totalTime > 0 {
-            self.player?.seek(to: CMTimeMakeWithSeconds(value * totalTime, preferredTimescale: Int32(NSEC_PER_SEC)), completionHandler: { [weak self] (finished) in
+            self.player?.seek(to: CMTimeMakeWithSeconds( value, preferredTimescale: Int32(NSEC_PER_SEC)), completionHandler: { [weak self] (finished) in
                 if finished {
                     self?.sliderView.isdragging = false
                 }
@@ -137,7 +149,7 @@ extension EGPortraitControlView: EGSliderViewDelegate {
     }
     
     
-    func sliderValueChanged(value: TimeInterval) {
+    func sliderValueChanged(value: Double) {
         
         if totalTime == 0 {
             self.sliderView.value = 0
@@ -148,16 +160,16 @@ extension EGPortraitControlView: EGSliderViewDelegate {
             return
         }
         self.sliderView.isdragging = true
-        let currentTimeString = convertTimeSecond(timeSecond: Int(totalTime * value))
+        let currentTimeString = convertTimeSecond(timeSecond: Int(value))
         self.currentTimeLabel.text = currentTimeString
     }
     
     
     
-    func sliderTapped(value: TimeInterval) {
+    func sliderTapped(value: Double) {
         if totalTime > 0 {
             self.sliderView.isdragging = true
-            self.player?.seek(to: CMTimeMakeWithSeconds(value * totalTime, preferredTimescale: Int32(NSEC_PER_SEC)), completionHandler: { [weak self] (finished) in
+            self.player?.seek(to: CMTimeMakeWithSeconds(value, preferredTimescale: Int32(NSEC_PER_SEC)), completionHandler: { [weak self] (finished) in
                 if finished {
                     self?.sliderView.isdragging = false
                     self?.player?.play()

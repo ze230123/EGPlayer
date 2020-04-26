@@ -47,7 +47,7 @@
                         <constraint firstAttribute="bottom" secondItem="cgq-U5-w7H" secondAttribute="bottom" constant="3" id="y3M-yA-A3V"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojE-J5-vKJ">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojE-J5-vKJ" customClass="GradientView" customModule="EGPlayer" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="156" width="375" height="54"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ka-vR-dOW">
@@ -82,7 +82,7 @@
                                 <action selector="showButtonAction:" destination="-1" eventType="touchUpInside" id="E72-Q3-kpa"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22:34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjC-9e-M2o">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjC-9e-M2o">
                             <rect key="frame" x="291" y="18.5" width="35" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="UwC-pq-Wvf"/>
@@ -100,7 +100,7 @@
                             <viewLayoutGuide key="safeArea" id="m5Z-jr-2OV"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="sLz-a7-ybm" firstAttribute="centerY" secondItem="2Ka-vR-dOW" secondAttribute="centerY" id="0TH-Ic-Ub0"/>
                         <constraint firstItem="cjC-9e-M2o" firstAttribute="leading" secondItem="7ou-Kd-r0S" secondAttribute="trailing" constant="10" id="79J-M6-cOG"/>
@@ -116,6 +116,20 @@
                         <constraint firstItem="7ou-Kd-r0S" firstAttribute="centerY" secondItem="2Ka-vR-dOW" secondAttribute="centerY" id="pmx-Ky-7Dg"/>
                         <constraint firstItem="sLz-a7-ybm" firstAttribute="leading" secondItem="2Ka-vR-dOW" secondAttribute="trailing" constant="15" id="reo-x9-vmU"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                            <point key="value" x="0.5" y="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                            <point key="value" x="0.5" y="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -10,13 +10,13 @@ import UIKit
 
 protocol EGSliderViewDelegate {
     ///滑块滑动开始
-    func sliderTouchBegan(value: TimeInterval)
+    func sliderTouchBegan()
     /// 滑块滑动中
-    func sliderValueChanged(value: TimeInterval)
+    func sliderValueChanged(value: Double)
     /// 滑块滑动结束
-    func sliderTouchEnded(value: TimeInterval)
+    func sliderTouchEnded(value: Double)
     /// 滑杆点击
-    func sliderTapped(value: TimeInterval)
+    func sliderTapped(value: Double)
     
 }
 
@@ -26,34 +26,34 @@ class EGSliderView: UIView, NibLoadable {
     ///底部view
     @IBOutlet weak var bgProgressView: UIView!
     
-    ///缓冲进度view
-    @IBOutlet weak var bufferProgressView: UIView!
+    @IBOutlet weak var sliderView: UISlider!
+    
     @IBOutlet weak var bufferWith: NSLayoutConstraint!
     
-    ///播放进度view
-    @IBOutlet weak var sliderProgressView: UIView!
-    @IBOutlet weak var sliderWidth: NSLayoutConstraint!
-    ///滑块view
-    @IBOutlet weak var sliderView: UIView!
+    @IBOutlet weak var progress: UIProgressView!
     
     /// 是否正在拖动
     var isdragging: Bool = false
     
     var delegate: EGSliderViewDelegate?
-    
-    
-    ///滑竿进度
-    var value: CGFloat = 0 {
-        
-        didSet{
-            sliderWidth.constant = value * (self.bounds.width - self.sliderView.bounds.width)
+    var totalTime: Float = 0 {
+        didSet {
+            self.sliderView.maximumValue = self.totalTime
         }
     }
     
+    ///滑竿进度
+    var value: Float = 0 {
+        
+        didSet{
+            sliderView.value = self.value
+        }
+    }
+        
     ///缓冲进度
     var bufferValue: CGFloat = 0 {
         didSet {
-            bufferWith.constant = bufferValue * self.bounds.width
+            progress.progress = Float(bufferValue)
 
         }
     }
@@ -69,77 +69,51 @@ class EGSliderView: UIView, NibLoadable {
         super.init(coder: coder)
         initViewFromNib()
         addOtherActions()
-
     }
     
     // MARK: - User action
     func addOtherActions() {
-        
-        self.sliderView.layer.cornerRadius = 7
-        
-        
         // 添加点击手势
-        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tapped(_ :)))
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tappeds(_ :)))
         self.addGestureRecognizer(tapGesture)
         
-        // 添加滑动手势
-        let sliderGesture = UIPanGestureRecognizer.init(target: self, action: #selector(sliderGesture(_ :)))
-        self.addGestureRecognizer(sliderGesture)
+        sliderView.addTarget(self, action: #selector(sliderBtnTouchBegin(_ :)), for: .touchDown)
+        sliderView.addTarget(self, action: #selector(sliderBtnDragMoving(_ :)), for: .valueChanged)
+        sliderView.addTarget(self, action: #selector(sliderBtnTouchEnded(_ :)), for: .touchUpInside)
         
     }
     
-    @objc func tapped(_ tap: UITapGestureRecognizer) {
+    @objc func tappeds(_ tap: UITapGestureRecognizer) {
         let point = tap.location(in: bgProgressView)
-        var value = (point.x - sliderView.bounds.width * 0.5) * 1.0 / bgProgressView.bounds.width
-        value = value > 1.0 ? 1.0 : value <= 0 ? 0 : value
+        var value = Float(point.x / bgProgressView.bounds.width) * self.totalTime
+        let totalTime = Float(self.totalTime)
+        value = value > totalTime ? totalTime : value <= 0 ? 0 : value
         self.value = value
-        self.delegate?.sliderTapped(value: TimeInterval(value))
-        
-    }
-    
-    @objc func sliderGesture(_ gesture: UIGestureRecognizer) {
-        
-        switch gesture.state {
-        case .began:
-            sliderBtnTouchBegin(view: sliderView)
-        case .changed:
-            sliderBtnDragMoving(view: sliderView, touchpoint: gesture.location(in: bgProgressView))
-        case .ended:
-            sliderBtnTouchEnded(view: sliderView)
-        default:
-            break
-        }
-        
-    }
-    
-    private func sliderBtnTouchBegin(view: UIView) {
-        self.delegate?.sliderTouchBegan(value: TimeInterval(self.value))
-        UIView.animate(withDuration: 0.3) {
-            view.transform = CGAffineTransform.init(scaleX: 1.2, y: 1.2)
-        }
-    }
-    
-    private func sliderBtnTouchEnded(view: UIView) {
-        self.delegate?.sliderTouchEnded(value: TimeInterval(self.value))
-        
-        UIView.animate(withDuration: 0.3) {
-            view.transform = CGAffineTransform.identity
-        }
+        self.delegate?.sliderTapped(value: Double(value))
 
     }
     
-    private func sliderBtnDragMoving(view: UIView, touchpoint: CGPoint) {
-        let point = touchpoint
-        var value = (point.x - view.bounds.width * 0.5) / bgProgressView.bounds.width
-        value = value > 1.0 ? 1.0 : value <= 0.0 ? 0.0 : value
-        if self.value == value {
+    
+    @objc func sliderBtnTouchBegin(_ slider: UISlider) {
+        self.delegate?.sliderTouchBegan()
+        
+    }
+
+    @objc func sliderBtnTouchEnded(_ slider: UISlider) {
+        self.delegate?.sliderTouchEnded(value: Double(slider.value))
+
+    }
+    
+    @objc func sliderBtnDragMoving(_ slider: UISlider) {
+        var value = slider.value
+        let totalTime = Float(self.totalTime)
+        value = value > totalTime ? totalTime : value <= 0 ? 0 : value
+        if self.value == Float(value) {
             return
         }
-        self.value = value
-        self.delegate?.sliderValueChanged(value: TimeInterval(value))
+        self.value = Float(value)
+        self.delegate?.sliderValueChanged(value: Double(value))
         
     }
-    
-
     
 }
