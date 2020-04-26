@@ -34,7 +34,7 @@
                                 <constraint firstAttribute="height" constant="18" id="MIe-pf-OCh"/>
                                 <constraint firstAttribute="width" constant="10" id="OGe-z7-w9K"/>
                             </constraints>
-                            <state key="normal" title="Button" image="back"/>
+                            <state key="normal" title="Button" image="player_back"/>
                             <connections>
                                 <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="uGM-xq-DaM"/>
                             </connections>
@@ -71,7 +71,7 @@
                                     </constraints>
                                     <viewLayoutGuide key="safeArea" id="rAm-2N-g7U"/>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22:34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJa-s5-034">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJa-s5-034">
                                     <rect key="frame" x="669" y="21.5" width="35" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="35" id="LYE-uU-TPn"/>
@@ -116,9 +116,23 @@
                                         <constraint firstAttribute="height" constant="18" id="PBN-04-qcg"/>
                                         <constraint firstAttribute="width" constant="18" id="tK6-bO-U46"/>
                                     </constraints>
-                                    <state key="normal" title="Button" image="show"/>
+                                    <state key="normal" title="Button" image="player_landScap"/>
                                     <connections>
                                         <action selector="showButtonAction:" destination="-1" eventType="touchUpInside" id="Rlz-YW-dqp"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBH-Ta-ULe">
+                                    <rect key="frame" x="619" y="-2.5" width="35" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="PJa-aF-c2V"/>
+                                        <constraint firstAttribute="width" constant="35" id="WuY-q4-C1U"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="14"/>
+                                    <state key="normal" title="倍速">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="rateButtonClickAction:" destination="-1" eventType="touchUpInside" id="IG0-tr-bCB"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -127,8 +141,10 @@
                                 <constraint firstAttribute="height" constant="44" id="0eg-0I-wvK"/>
                                 <constraint firstAttribute="trailing" secondItem="xK3-ut-MbR" secondAttribute="trailing" constant="16" id="7ao-DM-HfV"/>
                                 <constraint firstItem="TxU-wI-LtA" firstAttribute="leading" secondItem="3Uy-Cw-kql" secondAttribute="leading" constant="16" id="IwK-X2-rtF"/>
+                                <constraint firstItem="xK3-ut-MbR" firstAttribute="leading" secondItem="RBH-Ta-ULe" secondAttribute="trailing" constant="32" id="UY2-4h-Of5"/>
                                 <constraint firstItem="xK3-ut-MbR" firstAttribute="centerY" secondItem="TxU-wI-LtA" secondAttribute="centerY" id="W1s-oz-hws"/>
                                 <constraint firstAttribute="bottom" secondItem="TxU-wI-LtA" secondAttribute="bottom" constant="25" id="Zce-DF-yUq"/>
+                                <constraint firstItem="RBH-Ta-ULe" firstAttribute="centerY" secondItem="xK3-ut-MbR" secondAttribute="centerY" id="xoM-Rr-gP1"/>
                             </constraints>
                             <viewLayoutGuide key="safeArea" id="4C0-rA-93j"/>
                         </view>
@@ -177,9 +193,9 @@
         </view>
     </objects>
     <resources>
-        <image name="back" width="20" height="20"/>
         <image name="play" width="12" height="18"/>
+        <image name="player_back" width="12" height="20"/>
+        <image name="player_landScap" width="16" height="15"/>
         <image name="player_play" width="42" height="50"/>
-        <image name="show" width="18" height="18"/>
     </resources>
 </document>

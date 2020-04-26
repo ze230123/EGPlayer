@@ -72,12 +72,18 @@ class EGLandScapeControlView: UIView, NibLoadable {
         self.backButtonActionBlock?()
     }
     
+    ///全屏
     @IBAction func showButtonAction(_ sender: Any) {
         self.showButtonActionBlock?()
     }
     
+    ///播放暂停
     @IBAction func playPauseButtonClickAction(_ sender: Any) {
         playOrPause()
+    }
+    
+    ///速度
+    @IBAction func rateButtonClickAction(_ sender: Any) {
     }
 }
 
