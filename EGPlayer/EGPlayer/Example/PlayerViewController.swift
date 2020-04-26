@@ -59,13 +59,10 @@ class PlayerViewController: UIViewController {
     }
 
     @IBAction func fullAction(_ sender: UIButton) {
-//        let vc = UIViewController()
-//        vc.view.backgroundColor = .white
-//        vc.modalPresentationStyle = .fullScreen
-        let vc = FullScreenViewController(view: displayView)
+        displayView.tempFrame = view.convert(displayView.frame, to: view)
+        displayView.setPlayer(nil)
+        let vc = FullScreenViewController(view: displayView, player: player.player)
         present(vc, animated: true, completion: nil)
-
-        sender.isSelected = !sender.isSelected
     }
 
     @IBAction func valueChanged(_ sender: UISlider) {
