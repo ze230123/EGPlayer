@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import AVFoundation
 
 class FullScreenViewController: UIViewController {
     private let animator: RotateAnimator
+    @IBOutlet weak var displayView: DisplayerLayer!
 
-    init(view: DisplayerLayer) {
+    private var player: AVPlayer?
+    
+    init(view: DisplayerLayer, player: AVPlayer?) {
+        self.player = player
         animator = RotateAnimator(view: view)
         super.init(nibName: "FullScreenViewController", bundle: nil)
         transitioningDelegate = animator
@@ -24,10 +29,14 @@ class FullScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        displayView.setPlayer(player)
     }
 
     @IBAction func dismissAction() {
         dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            self.animator.view.setPlayer(self.player)
+        }
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -94,9 +103,6 @@ class RotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         toView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
         containerView.addSubview(toView)
 
-        view.frame = toView.bounds
-        toView.addSubview(view)
-
         let presentedViewFinalFrame = transitionContext.finalFrame(for: presentedViewController)
 
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
@@ -126,22 +132,15 @@ class RotateDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             return
         }
 
-        
-    // 计算 fromView的最终位置
-    let smallMovieFrame = transitionContext.containerView.convert(view.tempFrame, from: view.parentView)
+        // 计算 fromView的最终位置
+        let smallMovieFrame = transitionContext.containerView.convert(view.tempFrame, from: view.parentView)
 
-
-    UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .layoutSubviews, animations: {[weak self] in
-        
-        fromView.transform = .identity
-        fromView.frame = smallMovieFrame
-        self?.view.frame = fromView.bounds
-    }) { (_) in
-        self.view.frame = self.view.tempFrame
-        self.view.parentView?.addSubview(self.view)
-        fromView.removeFromSuperview()
-        transitionContext.completeTransition(true)
-
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .layoutSubviews, animations: {
+            fromView.transform = .identity
+            fromView.frame = smallMovieFrame
+        }) { (_) in
+            fromView.removeFromSuperview()
+            transitionContext.completeTransition(true)
         }
     }
 }

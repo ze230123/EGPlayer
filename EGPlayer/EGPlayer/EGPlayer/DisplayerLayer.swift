@@ -22,7 +22,7 @@ class DisplayerLayer: UIView {
         return AVPlayerLayer.self
     }
 
-    func setPlayer(_ player: AVPlayer) {
+    func setPlayer(_ player: AVPlayer?) {
         playerLayer.player = player
         playerLayer.videoGravity = .resizeAspectFill
     }
