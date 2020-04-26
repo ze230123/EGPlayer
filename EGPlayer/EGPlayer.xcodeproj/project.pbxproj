@@ -32,6 +32,7 @@
 		840986C824528DC700BD7760 /* EGPortraitControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840986C624528DC600BD7760 /* EGPortraitControlView.xib */; };
 		840986C924528DC700BD7760 /* EGPortraitControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986C724528DC600BD7760 /* EGPortraitControlView.swift */; };
 		840986CB2452ED5E00BD7760 /* EGPlayerGestureControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */; };
+		840986CD245534FA00BD7760 /* EGRotatePresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986CC245534FA00BD7760 /* EGRotatePresentAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		840986C624528DC600BD7760 /* EGPortraitControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EGPortraitControlView.xib; sourceTree = "<group>"; };
 		840986C724528DC600BD7760 /* EGPortraitControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGPortraitControlView.swift; sourceTree = "<group>"; };
 		840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayerGestureControl.swift; sourceTree = "<group>"; };
+		840986CC245534FA00BD7760 /* EGRotatePresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGRotatePresentAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				840986C024515D6000BD7760 /* EGSliderView.xib */,
 				766D947B24527F840037F0EC /* EGOrientationObserver.swift */,
 				840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */,
+				840986CC245534FA00BD7760 /* EGRotatePresentAnimator.swift */,
 			);
 			path = EGPlayer;
 			sourceTree = "<group>";
@@ -301,8 +304,6 @@
 			files = (
 				840986C52452827C00BD7760 /* EGLandScapeControlView.xib in Resources */,
 				7679FD7E24504B56007CA928 /* LaunchScreen.storyboard in Resources */,
-
-				840986BD2451387C00BD7760 /* EGPlayerControlView.xib in Resources */,
 				766D9482245296670037F0EC /* FullScreenViewController.xib in Resources */,
 				7679FDAE24513751007CA928 /* PlayerViewController.xib in Resources */,
 				840986C124515D6000BD7760 /* EGSliderView.xib in Resources */,
@@ -348,6 +349,7 @@
 				766D947C24527F840037F0EC /* EGOrientationObserver.swift in Sources */,
 				7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */,
 				766D9481245296670037F0EC /* FullScreenViewController.swift in Sources */,
+				840986CD245534FA00BD7760 /* EGRotatePresentAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

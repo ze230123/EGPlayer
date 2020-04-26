@@ -20,6 +20,7 @@ class PlayerViewController: UIViewController {
     deinit {
         print("PlayerViewController_deinit")
     }
+    
 
     override var prefersStatusBarHidden: Bool {
         return false
@@ -48,6 +49,12 @@ class PlayerViewController: UIViewController {
         controlView.backBtnClickCallback = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        controlView.showBtnClickCallBack = { [weak self] in
+            
+            self?.presentFullView()
+        }
+        
     }
 
     @IBAction func playAction() {
@@ -59,9 +66,17 @@ class PlayerViewController: UIViewController {
     }
 
     @IBAction func fullAction(_ sender: UIButton) {
+        presentFullView()
+    }
+    
+    func presentFullView() {
         displayView.tempFrame = view.convert(displayView.frame, to: view)
         displayView.setPlayer(nil)
-        let vc = FullScreenViewController(view: displayView, player: player.player)
+        controlView.isFullScreen = true
+        let vc = FullScreenViewController(view: displayView, player: player.player, controlView: self.controlView)
+        vc.dismissBlock = { [weak self] in
+            self?.controlView.isFullScreen = false
+        }
         present(vc, animated: true, completion: nil)
     }
 

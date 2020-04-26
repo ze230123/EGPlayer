@@ -62,6 +62,7 @@ class EGLandScapeControlView: UIView, NibLoadable {
     }
     
     func initSubViews() {
+        
         self.sliderView.value = 0
         self.sliderView.bufferValue = 0
         self.sliderView.delegate = self

@@ -19,15 +19,17 @@ class EGPlayerControlView: UIView, PlayerControlable {
     }
     
     var backBtnClickCallback: (() -> Void)?
+    var showBtnClickCallBack: (() -> Void)?
     /// 控制层显示或者隐藏
-    var controlViewAppeared: Bool = false
+    var controlViewAppeared: Bool = true
     
     
     ///监听是否横屏竖屏
-    var isFullScreen: Bool = false
-//    {
-//        return false
-//    }
+    var isFullScreen: Bool = false {
+        didSet {
+            setControlViewOrientation(self.isFullScreen)
+        }
+    }
     
     var totalTime: Double {
         return self.player?.currentItem?.duration.seconds ?? 0
@@ -79,7 +81,8 @@ class EGPlayerControlView: UIView, PlayerControlable {
             self?.backBtnClickCallback?()
         }
         portraitControlView.showButtonActionBlock = {[weak self] in
-            self?.setControlViewOrientation(true)
+//            self?.setControlViewOrientation(true)
+            self?.showBtnClickCallBack?()
         }
         return portraitControlView
     }()
@@ -112,7 +115,7 @@ extension EGPlayerControlView {
     
     func setControlViewOrientation(_ fullScreen: Bool) {
         
-        self.isFullScreen = fullScreen
+//        self.isFullScreen = fullScreen
         self.portraitControlView.isHidden = fullScreen
         self.landScapeControlView.isHidden = !fullScreen
         if self.controlViewAppeared {

@@ -107,6 +107,7 @@
                                     <state key="selected" image="play"/>
                                     <connections>
                                         <action selector="playPauseButtonClickAction" destination="-1" eventType="touchUpInside" id="WOo-W2-rtS"/>
+                                        <action selector="playPauseButtonClickAction:" destination="-1" eventType="touchUpInside" id="i4b-sZ-O7X"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xK3-ut-MbR">
@@ -145,13 +146,13 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZsF-wB-EmQ" secondAttribute="trailing" id="2Kr-XA-8K1"/>
                 <constraint firstItem="W2V-C7-uUt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Bwh-gv-dx8"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="W2V-C7-uUt" secondAttribute="trailing" id="HJX-El-RSC"/>
+                <constraint firstAttribute="trailing" secondItem="W2V-C7-uUt" secondAttribute="trailing" id="HJX-El-RSC"/>
                 <constraint firstItem="ZsF-wB-EmQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="IvT-Y2-Ej9"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="W2V-C7-uUt" secondAttribute="bottom" id="lH6-Te-k8v"/>
+                <constraint firstAttribute="bottom" secondItem="W2V-C7-uUt" secondAttribute="bottom" id="lH6-Te-k8v"/>
                 <constraint firstItem="ZsF-wB-EmQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tbu-lz-IRE"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
