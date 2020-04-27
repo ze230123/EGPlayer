@@ -85,25 +85,26 @@ extension EGPortraitControlView {
     func setCurrentTime(_ currentTime: Double) {
         
         self.currentTime = currentTime
-        self.sliderView.value = Float(currentTime)
-        self.sliderView.totalTime = Float(totalTime)
+        self.sliderView.value = currentTime
     }
     
     func setProgressAndTotalTime(_ progress: Double, totalTime: Double) {
         self.totalTime = totalTime
         self.sliderView.bufferValue = CGFloat(progress)
+        self.sliderView.totalTime = totalTime
 
     }
     
     func showControlView() {
-        topView.alpha = 1
-        bottomView.alpha = 1
+        topView.isHidden = false
+        bottomView.isHidden = false
     }
     
     func hideControlView() {
-        topView.alpha = 0
-        bottomView.alpha = 0
+        topView.isHidden = true
+        bottomView.isHidden = true
     }
+    
     
     func playOrPause() {
         self.playerButton.isSelected = !self.playerButton.isSelected

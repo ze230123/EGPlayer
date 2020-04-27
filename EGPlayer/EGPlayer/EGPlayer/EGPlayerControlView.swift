@@ -22,7 +22,7 @@ class EGPlayerControlView: UIView, PlayerControlable {
     var showBtnClickCallBack: (() -> Void)?
     /// 控制层显示或者隐藏
     var controlViewAppeared: Bool = true
-    
+    var sumTime: Double = 0
     
     ///监听是否横屏竖屏
     var isFullScreen: Bool = false {
@@ -221,4 +221,29 @@ extension EGPlayerControlView {
         self.portraitControlView.setCurrentTime(time)
         self.landScapeControlView.setCurrentTime(time)
     }
+}
+
+extension EGPlayerControlView {
+    func gestureSingleTapped() {
+        guard (self.player != nil) else {
+            return
+        }
+        if controlViewAppeared {
+            self.hideAllControlViewWithAnimated(true)
+        } else {
+            self.hideAllControlViewWithAnimated(false)
+            self.showAllControlViewWithAnimated(true)
+        }
+    }
+    /// 开始滑动手势事件
+    func gestureBeganPan(_ control: EGPlayerGestureControl, _ derection: EGPlayerGestureControl.PanDirection) {
+        if derection == .H {
+            self.sumTime = self.currentTime
+        }
+    }
+
+    
+  
+    
+    
 }
