@@ -89,8 +89,8 @@ class EGFullScreenViewController: UIViewController {
     func dimissView() {
         dismiss(animated: true, completion: nil)
         dismiss(animated: true) {
-            self.animator.view.setPlayer(self.player)
-            self.dismissBlock?()
+//            self.animator.view.setPlayer(self.player)
+//            self.dismissBlock?()
         }
     }
     

@@ -20,7 +20,6 @@ class PlayerViewController: UIViewController {
     deinit {
         print("PlayerViewController_deinit")
     }
-    
 
     override var prefersStatusBarHidden: Bool {
         return false

@@ -10,7 +10,6 @@ import UIKit
 import AVFoundation
 
 class EGLandScapeControlView: UIView, NibLoadable {
-    
     /// 顶部工具栏
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var backButton: UIButton!

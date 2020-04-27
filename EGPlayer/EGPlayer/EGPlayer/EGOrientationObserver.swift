@@ -16,9 +16,6 @@ import Foundation
 
 
 class EGOrientationObserver {
-
-    
-    
     /// 添加观察者
     func addOrientationObserver() {}
     /// 删除观察者

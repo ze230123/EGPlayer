@@ -10,8 +10,8 @@ import UIKit
 
 
 class EGRotateAnimator: NSObject {
-    let view: DisplayerLayer
-    init(view: DisplayerLayer) {
+    let view: DisplayerLayer?
+    init(view: DisplayerLayer?) {
         self.view = view
         super.init()
     }
@@ -28,8 +28,8 @@ extension EGRotateAnimator: UIViewControllerTransitioningDelegate {
 }
 
 class EGRotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    let view: DisplayerLayer
-    init(view: DisplayerLayer) {
+    let view: DisplayerLayer?
+    init(view: DisplayerLayer?) {
         self.view = view
         super.init()
     }
@@ -39,10 +39,12 @@ class EGRotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toView = transitionContext.view(forKey: .to), let presentedViewController = transitionContext.viewController(forKey: .to)  else {
+        guard let toView = transitionContext.view(forKey: .to),
+            let presentedViewController = transitionContext.viewController(forKey: .to),
+            let view = view  else {
             return
         }
-        
+
         let containerView = transitionContext.containerView
         toView.frame = containerView.bounds
         
@@ -57,7 +59,7 @@ class EGRotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             toView.transform = .identity
             toView.frame = presentedViewFinalFrame
-            self.view.frame = toView.bounds
+            view.frame = toView.bounds
         }) { (_) in
             let wasCancelled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!wasCancelled)
@@ -66,8 +68,8 @@ class EGRotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 }
 
 class EGRotateDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    let view: DisplayerLayer
-    init(view: DisplayerLayer) {
+    let view: DisplayerLayer?
+    init(view: DisplayerLayer?) {
         self.view = view
         super.init()
     }
@@ -77,7 +79,8 @@ class EGRotateDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let fromView = transitionContext.view(forKey: .from), let fromVC = transitionContext.viewController(forKey: .from) else {
+        guard let fromView = transitionContext.view(forKey: .from),
+            let view = view else {
             return
         }
         

@@ -23,7 +23,6 @@ class FullScreenViewController: UIViewController {
     
     var dismissBlock:(() -> Void)?
     
-    
     init(view: DisplayerLayer, player: AVPlayer?, controlView: EGPlayerControlView) {
         self.player = player
         self.controlView = controlView
@@ -33,7 +32,7 @@ class FullScreenViewController: UIViewController {
         modalPresentationStyle = .fullScreen
         initSubViews()
     }
-    
+
     func initSubViews() {
         
         self.controlView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,8 +81,8 @@ class FullScreenViewController: UIViewController {
     func dimissView() {
         dismiss(animated: true, completion: nil)
         dismiss(animated: true) {
-            self.animator.view.setPlayer(self.player)
-            self.dismissBlock?()
+//            self.animator.view.setPlayer(self.player)
+//            self.dismissBlock?()
         }
     }
 
