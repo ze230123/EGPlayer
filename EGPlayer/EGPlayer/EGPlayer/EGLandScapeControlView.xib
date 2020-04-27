@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,6 +14,7 @@
                 <outlet property="backButton" destination="W1U-OM-xFw" id="0dt-Zk-MDY"/>
                 <outlet property="bottomView" destination="W2V-C7-uUt" id="bH6-ED-ba9"/>
                 <outlet property="currentTimeLabel" destination="nN2-Nw-f2c" id="JRL-fL-IAf"/>
+                <outlet property="middleView" destination="ee9-Y4-Et2" id="BSi-8f-HaD"/>
                 <outlet property="playerButton" destination="TxU-wI-LtA" id="YOr-NF-flW"/>
                 <outlet property="showButton" destination="xK3-ut-MbR" id="RzP-Se-Te7"/>
                 <outlet property="sliderView" destination="F7U-pw-e79" id="ZNZ-Tm-uL7"/>
@@ -174,6 +175,11 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ee9-Y4-Et2">
+                    <rect key="frame" x="0.0" y="54" width="720" height="217"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="p8c-QX-PWh"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -181,8 +187,12 @@
                 <constraint firstItem="W2V-C7-uUt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Bwh-gv-dx8"/>
                 <constraint firstAttribute="trailing" secondItem="W2V-C7-uUt" secondAttribute="trailing" id="HJX-El-RSC"/>
                 <constraint firstItem="ZsF-wB-EmQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="IvT-Y2-Ej9"/>
+                <constraint firstItem="ee9-Y4-Et2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Izo-ge-KeL"/>
+                <constraint firstItem="ee9-Y4-Et2" firstAttribute="top" secondItem="ZsF-wB-EmQ" secondAttribute="bottom" id="d6k-vx-MiI"/>
                 <constraint firstAttribute="bottom" secondItem="W2V-C7-uUt" secondAttribute="bottom" id="lH6-Te-k8v"/>
+                <constraint firstItem="W2V-C7-uUt" firstAttribute="top" secondItem="ee9-Y4-Et2" secondAttribute="bottom" id="stV-vH-gar"/>
                 <constraint firstItem="ZsF-wB-EmQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tbu-lz-IRE"/>
+                <constraint firstItem="ee9-Y4-Et2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="w2c-Sh-Jmu"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

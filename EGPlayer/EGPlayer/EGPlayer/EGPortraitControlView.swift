@@ -28,6 +28,7 @@ class EGPortraitControlView: UIView, NibLoadable {
     @IBOutlet weak var allTimeLabel: UILabel!
     /// 滑杆
     @IBOutlet weak var sliderView: EGSliderView!
+    @IBOutlet weak var middleView: UIView!
     
     weak var player: AVPlayer?
     var backButtonActionBlock: (() -> Void)?

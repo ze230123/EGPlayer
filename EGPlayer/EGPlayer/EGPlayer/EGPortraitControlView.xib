@@ -14,6 +14,7 @@
                 <outlet property="backButton" destination="cgq-U5-w7H" id="wrg-qd-LeJ"/>
                 <outlet property="bottomView" destination="ojE-J5-vKJ" id="zQB-Zq-SYT"/>
                 <outlet property="currentTimeLabel" destination="sLz-a7-ybm" id="1So-dE-BRd"/>
+                <outlet property="middleView" destination="7G6-Ic-VXZ" id="SPo-7m-rJu"/>
                 <outlet property="playerButton" destination="2Ka-vR-dOW" id="g3u-OZ-zlU"/>
                 <outlet property="showButton" destination="ADd-7X-baS" id="UL3-8T-RgO"/>
                 <outlet property="sliderView" destination="7ou-Kd-r0S" id="AHy-JP-jFO"/>
@@ -131,13 +132,22 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7G6-Ic-VXZ">
+                    <rect key="frame" x="0.0" y="54" width="375" height="102"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="8vd-Bq-uzu"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="7G6-Ic-VXZ" firstAttribute="top" secondItem="dfN-mE-ILj" secondAttribute="bottom" id="AJZ-A5-DaS"/>
+                <constraint firstItem="ojE-J5-vKJ" firstAttribute="top" secondItem="7G6-Ic-VXZ" secondAttribute="bottom" id="BBd-p6-4N6"/>
                 <constraint firstItem="ojE-J5-vKJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="L8c-Wp-MuB"/>
+                <constraint firstItem="7G6-Ic-VXZ" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="LjF-nA-fkO"/>
                 <constraint firstItem="dfN-mE-ILj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UeM-gh-aBB"/>
                 <constraint firstAttribute="trailing" secondItem="ojE-J5-vKJ" secondAttribute="trailing" id="eai-i6-qFB"/>
                 <constraint firstAttribute="bottom" secondItem="ojE-J5-vKJ" secondAttribute="bottom" id="fDg-Ca-cn0"/>
+                <constraint firstItem="7G6-Ic-VXZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ozB-Ol-uyY"/>
                 <constraint firstItem="dfN-mE-ILj" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="thZ-0j-vq3"/>
                 <constraint firstItem="dfN-mE-ILj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ttA-cT-RQj"/>
             </constraints>

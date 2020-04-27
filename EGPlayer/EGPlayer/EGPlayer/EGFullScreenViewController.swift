@@ -1,8 +1,8 @@
 //
-//  FullScreenViewController.swift
+//  EGFullScreenViewController.swift
 //  EGPlayer
 //
-//  Created by youzy01 on 2020/4/24.
+//  Created by Jason on 2020/4/27.
 //  Copyright © 2020 youzy. All rights reserved.
 //
 
@@ -10,15 +10,15 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
-class FullScreenViewController: UIViewController {
+class EGFullScreenViewController: UIViewController {
+    
     private let animator: EGRotateAnimator
     var controlView:  EGPlayerControlView
-    @IBOutlet weak var displayView: DisplayerLayer!
     
     var brightness = UIScreen.main.brightness
     var volume = AVAudioSession.sharedInstance().outputVolume
     var volumeViewSlider: UISlider?
-
+    
     private var player: AVPlayer?
     
     var dismissBlock:(() -> Void)?
@@ -28,13 +28,20 @@ class FullScreenViewController: UIViewController {
         self.player = player
         self.controlView = controlView
         animator = EGRotateAnimator(view: view)
-        super.init(nibName: "FullScreenViewController", bundle: nil)
+        super.init(nibName: nil, bundle: nil)
         transitioningDelegate = animator
         modalPresentationStyle = .fullScreen
         initSubViews()
     }
     
     func initSubViews() {
+        
+        self.displayView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.displayView)
+        displayView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        displayView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        displayView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        displayView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
         self.controlView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.controlView)
@@ -65,16 +72,16 @@ class FullScreenViewController: UIViewController {
         }
         
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         displayView.setPlayer(player)
     }
-
+    
     @IBAction func dismissAction() {
         dimissView()
     }
@@ -86,26 +93,31 @@ class FullScreenViewController: UIViewController {
             self.dismissBlock?()
         }
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return false
     }
-
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
+    
     override var shouldAutorotate: Bool {
         return false
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .landscapeRight
     }
-
+    
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .landscapeRight
     }
+    
+    lazy var displayView: DisplayerLayer = {
+        let displayer = DisplayerLayer()
+        return displayer
+    }()
     
     private lazy var gestureControl: EGPlayerGestureControl = {
         let gestureControl = EGPlayerGestureControl()
@@ -122,7 +134,7 @@ class FullScreenViewController: UIViewController {
     
 }
 
-extension FullScreenViewController {
+extension EGFullScreenViewController {
     
     func getVolume() -> Float {
         var volume = self.volumeViewSlider?.value
@@ -133,16 +145,17 @@ extension FullScreenViewController {
     }
     
     func gestureChangedPan(_ control: EGPlayerGestureControl, _ derection: EGPlayerGestureControl.PanDirection, _ location: EGPlayerGestureControl.PanLoacation, _ velocity: CGPoint)  {
-          if derection == .V {
-              if location == .left {
+        if derection == .V {
+            if location == .left {
                 self.brightness -= velocity.y / 10000
                 UIScreen.main.brightness = self.brightness
-              } else if location == .right {
+            } else if location == .right {
                 var volume = getVolume()
                 volume -= Float(velocity.y / 10000)
                 self.volumeViewSlider?.value = volume
             }
-          }
-      }
+        }
+    }
     
 }
+

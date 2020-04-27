@@ -81,7 +81,6 @@ class EGPlayerControlView: UIView, PlayerControlable {
             self?.backBtnClickCallback?()
         }
         portraitControlView.showButtonActionBlock = {[weak self] in
-//            self?.setControlViewOrientation(true)
             self?.showBtnClickCallBack?()
         }
         return portraitControlView
@@ -92,10 +91,10 @@ class EGPlayerControlView: UIView, PlayerControlable {
         let landScapeControlView = EGLandScapeControlView()
         landScapeControlView.isHidden = true
         landScapeControlView.backButtonActionBlock = {[weak self] in
-            
+            self?.backBtnClickCallback?()
         }
         landScapeControlView.showButtonActionBlock = {[weak self] in
-            
+            self?.showBtnClickCallBack?()
         }
         
         return landScapeControlView
@@ -121,7 +120,7 @@ extension EGPlayerControlView {
         if self.controlViewAppeared {
             self.showAllControlViewWithAnimated(false)
         } else {
-            self.hideAllControlViewWithAnimated(false)
+            self.hideAllControlViewWithAnimated(true)
         }
     }
     

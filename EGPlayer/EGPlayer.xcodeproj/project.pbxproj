@@ -34,6 +34,8 @@
 		840986CB2452ED5E00BD7760 /* EGPlayerGestureControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */; };
 		840986CD245534FA00BD7760 /* EGRotatePresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986CC245534FA00BD7760 /* EGRotatePresentAnimator.swift */; };
 		840986D12455944300BD7760 /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986D02455944300BD7760 /* RateViewController.swift */; };
+		840986D3245685C000BD7760 /* EGPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986D2245685C000BD7760 /* EGPlayerViewController.swift */; };
+		840986D524568AEE00BD7760 /* EGFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986D424568AEE00BD7760 /* EGFullScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayerGestureControl.swift; sourceTree = "<group>"; };
 		840986CC245534FA00BD7760 /* EGRotatePresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGRotatePresentAnimator.swift; sourceTree = "<group>"; };
 		840986D02455944300BD7760 /* RateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateViewController.swift; sourceTree = "<group>"; };
+		840986D2245685C000BD7760 /* EGPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayerViewController.swift; sourceTree = "<group>"; };
+		840986D424568AEE00BD7760 /* EGFullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGFullScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,8 @@
 				766D947B24527F840037F0EC /* EGOrientationObserver.swift */,
 				840986CA2452ED5D00BD7760 /* EGPlayerGestureControl.swift */,
 				840986CC245534FA00BD7760 /* EGRotatePresentAnimator.swift */,
+				840986D2245685C000BD7760 /* EGPlayerViewController.swift */,
+				840986D424568AEE00BD7760 /* EGFullScreenViewController.swift */,
 			);
 			path = EGPlayer;
 			sourceTree = "<group>";
@@ -338,9 +344,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7679FDA724512D1A007CA928 /* PlayerControlable.swift in Sources */,
+				840986D3245685C000BD7760 /* EGPlayerViewController.swift in Sources */,
 				766D947E245294070037F0EC /* NavigationViewController.swift in Sources */,
 				7679FDAD24513751007CA928 /* PlayerViewController.swift in Sources */,
 				840986D12455944300BD7760 /* RateViewController.swift in Sources */,
+				840986D524568AEE00BD7760 /* EGFullScreenViewController.swift in Sources */,
 				7679FD7624504B55007CA928 /* ViewController.swift in Sources */,
 				7679FDA924512F5C007CA928 /* EGPlayerControlView.swift in Sources */,
 				7679FDA524512AE7007CA928 /* DisplayerLayer.swift in Sources */,

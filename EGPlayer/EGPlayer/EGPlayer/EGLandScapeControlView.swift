@@ -28,6 +28,8 @@ class EGLandScapeControlView: UIView, NibLoadable {
     @IBOutlet weak var allTimeLabel: UILabel!
     /// 滑杆
     @IBOutlet weak var sliderView: EGSliderView!
+    ///中间view
+    @IBOutlet weak var middleView: UIView!
     
     var player: AVPlayer?
     var backButtonActionBlock: (() -> Void)?
@@ -102,13 +104,13 @@ extension EGLandScapeControlView {
     }
     
     func showControlView() {
-        topView.isHidden = false
-        bottomView.isHidden = false
+        topView.alpha = 1
+        bottomView.alpha = 1
     }
     
     func hideControlView() {
-        topView.isHidden = true
-        bottomView.isHidden = true
+        topView.alpha = 0
+        bottomView.alpha = 0
     }
     
     func playOrPause() {
