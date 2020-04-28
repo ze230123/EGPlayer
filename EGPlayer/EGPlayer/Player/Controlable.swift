@@ -19,9 +19,9 @@ protocol Controlable: class {
     func doubleTapAction()
 
     // 设置音量
-    func setVolume(_ volume: Double)
+    func setVolume(_ volume: CGFloat)
     // 设置亮度
-    func setBrightness(_ brightness: Double)
+    func setBrightness(_ brightness: CGFloat)
     // 快进/快退
     func seekSecond(_ second: Double)
 
@@ -31,4 +31,8 @@ protocol Controlable: class {
     func setPlayTime(_ time: Double, total: Double)
     // 设置缓冲进度
     func setBuffer(_ buffer: Double)
+
+    func playTimeWillChange()
+    func playTimeDidChange(_ value: CGFloat)
+    func playTimeEndChange()
 }

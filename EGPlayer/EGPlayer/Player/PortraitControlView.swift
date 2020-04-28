@@ -25,17 +25,26 @@ class PortraitControlView: UIView, NibLoadable {
 }
 
 extension PortraitControlView: Controlable {
+    func playTimeWillChange() {
+    }
+    
+    func playTimeDidChange(_ value: CGFloat) {
+    }
+    
+    func playTimeEndChange() {
+    }
+    
     func singleTapAction() {
     }
     
     func doubleTapAction() {
     }
-    
-    func setVolume(_ volume: Double) {
+
+    func setVolume(_ volume: CGFloat) {
 
     }
 
-    func setBrightness(_ brightness: Double) {
+    func setBrightness(_ brightness: CGFloat) {
 
     }
 

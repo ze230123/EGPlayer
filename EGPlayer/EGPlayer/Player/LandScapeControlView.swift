@@ -25,6 +25,15 @@ class LandScapeControlView: UIView, NibLoadable {
 }
 
 extension LandScapeControlView: Controlable {
+    func playTimeWillChange() {
+    }
+    
+    func playTimeDidChange(_ value: CGFloat) {
+    }
+    
+    func playTimeEndChange() {
+    }
+
     func singleTapAction() {
         print("显示/隐藏 上下工具栏")
     }
@@ -33,11 +42,11 @@ extension LandScapeControlView: Controlable {
         print("双击：播放/暂定")
     }
 
-    func setVolume(_ volume: Double) {
+    func setVolume(_ volume: CGFloat) {
         print("设置音量", volume)
     }
 
-    func setBrightness(_ brightness: Double) {
+    func setBrightness(_ brightness: CGFloat) {
         print("设置亮度", brightness)
     }
 

@@ -14,12 +14,13 @@ class Player {
     private let player = AVPlayer()
 
     lazy var fullScreen = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
-
+    /// 竖屏手势控制器
     private let portraitGesture: GestureController
+    /// 横屏手势控制器
     private let landScapeGesture: GestureController
 
     private let itemObserver: PlayerItemObserver
-    
+
     /// 手机竖屏时的 控制view
     private var portraitControlView: (UIView & Controlable)
     /// 手机横屏时的 控制view
@@ -113,12 +114,45 @@ private extension Player {
         print("播放失败", error.localizedDescription)
     }
 
+    // FIXME: 全屏操作、需要测试
     func fullScreenAction() {
         portraitControlView.fullScreen = { [unowned self] in
+            self.getCurrentController()?.present(self.fullScreen, animated: true, completion: nil)
         }
 
         landScapeControlView.fullScreen = { [unowned self] in
             self.fullScreen.dismiss(animated: true, completion: nil)
         }
     }
+
+    func getCurrentController() -> UIViewController? {
+         guard let window = UIApplication.shared.windows.first else {
+             return nil
+         }
+         var tempView: UIView?
+         for subview in window.subviews.reversed() {
+             if subview.classForCoder.description() == "UILayoutContainerView" {
+                 tempView = subview
+                 break
+             }
+         }
+
+         if tempView == nil {
+             tempView = window.subviews.last
+         }
+
+         var nextResponder = tempView?.next
+         var next: Bool {
+             return !(nextResponder is UIViewController) || nextResponder is UINavigationController || nextResponder is UITabBarController
+         }
+
+         while next{
+             tempView = tempView?.subviews.first
+             if tempView == nil {
+                 return nil
+             }
+             nextResponder = tempView!.next
+         }
+         return nextResponder as? UIViewController
+     }
 }
