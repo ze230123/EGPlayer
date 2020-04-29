@@ -16,18 +16,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-y8-gXg">
-                                <rect key="frame" x="190" y="433" width="34" height="30"/>
-                                <state key="normal" title="push"/>
-                                <connections>
-                                    <action selector="tapAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="40k-z8-dxC"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hxh-Jf-0tb">
+                                <rect key="frame" x="180.5" y="393" width="53" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-y8-gXg">
+                                        <rect key="frame" x="0.0" y="0.0" width="53" height="30"/>
+                                        <state key="normal" title="push"/>
+                                        <connections>
+                                            <action selector="tapAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="40k-z8-dxC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mw-9F-avm">
+                                        <rect key="frame" x="0.0" y="40" width="53" height="30"/>
+                                        <state key="normal" title="window"/>
+                                        <connections>
+                                            <action selector="windowAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wbm-6h-mEh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4F1-1o-dZ5">
+                                        <rect key="frame" x="0.0" y="80" width="53" height="30"/>
+                                        <state key="normal" title="close"/>
+                                        <connections>
+                                            <action selector="closeAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="1db-bg-2mH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thB-iy-jWs">
+                                <rect key="frame" x="0.0" y="88" width="414" height="30"/>
+                                <subviews>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="kCk-6P-qTk">
+                                        <rect key="frame" x="0.0" y="14" width="414" height="2"/>
+                                    </progressView>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="99A-v8-Ngk">
+                                        <rect key="frame" x="-2" y="0.0" width="418" height="31"/>
+                                        <color key="maximumTrackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="99A-v8-Ngk" firstAttribute="centerY" secondItem="thB-iy-jWs" secondAttribute="centerY" id="2gS-TH-6M3"/>
+                                    <constraint firstItem="kCk-6P-qTk" firstAttribute="centerY" secondItem="thB-iy-jWs" secondAttribute="centerY" id="NI5-DF-hY4"/>
+                                    <constraint firstAttribute="trailing" secondItem="99A-v8-Ngk" secondAttribute="trailing" id="Nhg-LS-dXf"/>
+                                    <constraint firstAttribute="height" constant="30" id="Rvk-X5-4Rs"/>
+                                    <constraint firstAttribute="trailing" secondItem="kCk-6P-qTk" secondAttribute="trailing" id="oh5-ZA-3Ib"/>
+                                    <constraint firstItem="99A-v8-Ngk" firstAttribute="leading" secondItem="thB-iy-jWs" secondAttribute="leading" id="pVI-c4-ew8"/>
+                                    <constraint firstItem="kCk-6P-qTk" firstAttribute="leading" secondItem="thB-iy-jWs" secondAttribute="leading" id="r5o-t9-WxI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="zOG-y8-gXg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HOA-4p-IE3"/>
-                            <constraint firstItem="zOG-y8-gXg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="o2U-HA-JT4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="thB-iy-jWs" secondAttribute="trailing" id="PSW-2M-AwM"/>
+                            <constraint firstItem="thB-iy-jWs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eWa-ta-11g"/>
+                            <constraint firstItem="thB-iy-jWs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fTj-wb-M6w"/>
+                            <constraint firstItem="hxh-Jf-0tb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pqz-C2-LhT"/>
+                            <constraint firstItem="hxh-Jf-0tb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qj6-5n-IXl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

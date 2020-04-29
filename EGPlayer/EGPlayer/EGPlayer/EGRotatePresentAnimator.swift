@@ -35,7 +35,7 @@ class EGRotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return 5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -46,20 +46,17 @@ class EGRotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         }
 
         let containerView = transitionContext.containerView
-        toView.frame = containerView.bounds
-        
-        let center = containerView.convert(view.center, from: view)
+
+        let center = containerView.convert(view.tempFrame, from: view)
         toView.frame = view.bounds
-        toView.center = center
+//        toView.center = center
         toView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
         containerView.addSubview(toView)
-        
-        let presentedViewFinalFrame = transitionContext.finalFrame(for: presentedViewController)
-        
+
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             toView.transform = .identity
-            toView.frame = presentedViewFinalFrame
-            view.frame = toView.bounds
+            toView.frame = containerView.bounds
+            toView.layoutIfNeeded()
         }) { (_) in
             let wasCancelled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!wasCancelled)
@@ -75,7 +72,7 @@ class EGRotateDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return 5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -86,7 +83,7 @@ class EGRotateDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         // 计算 fromView的最终位置
         let smallMovieFrame = transitionContext.containerView.convert(view.tempFrame, from: view.parentView)
-        
+
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .layoutSubviews, animations: {
             fromView.transform = .identity
             fromView.frame = smallMovieFrame

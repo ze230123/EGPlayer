@@ -28,7 +28,10 @@ class GestureController {
     // 是否调节音量
     private var isVolume: Bool = false
 
+    private var startPoint: CGPoint = .zero
+
     init(view: UIView & Controlable) {
+        self.view = view
         singleTapGesture.require(toFail: doubleTapGesture)
 
         view.addGestureRecognizer(singleTapGesture)
@@ -62,14 +65,15 @@ extension GestureController {
                 direction = .vertical
                     isVolume = locationPoint.x <= frame.size.width / 2
             }
+            startPoint = locationPoint
         case .changed:
             if case .horizontal = direction {
-                view?.playTimeDidChange(veloctyPoint.x)
+                view?.playTimeDidChange((locationPoint.x - startPoint.x) / 10)
             } else {
                 if isVolume {
-                    view?.setVolume(veloctyPoint.y)
+                    view?.setVolume(locationPoint.y)
                 } else {
-                    view?.setBrightness(veloctyPoint.y)
+                    view?.setBrightness(locationPoint.y)
                 }
             }
         case .ended:

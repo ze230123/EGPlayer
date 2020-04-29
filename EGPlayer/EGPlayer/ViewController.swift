@@ -10,13 +10,28 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var window: UIWindow?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     @IBAction func tapAction() {
-        let vc = PlayerViewController()
+        let vc = NormalPlayerViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+
+    @IBAction func windowAction() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.windowLevel = .alert
+        window?.isHidden = false
+        window?.backgroundColor = UIColor.green
+        window?.rootViewController = NewFullViewController()
+//        window?.makeKeyAndVisible()
+    }
+
+    @IBAction func closeAction() {
+        window = nil
     }
 
     override var shouldAutorotate: Bool {

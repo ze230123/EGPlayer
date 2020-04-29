@@ -34,6 +34,11 @@
 		7688B0942456D89F00D27811 /* LandScapeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7688B0932456D89F00D27811 /* LandScapeControlView.xib */; };
 		7688B0982456E09C00D27811 /* PlayerItemObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688B0972456E09C00D27811 /* PlayerItemObserver.swift */; };
 		7688B09A2456E46400D27811 /* FullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688B0992456E46400D27811 /* FullViewController.swift */; };
+		7688B09D2457D0D900D27811 /* NormalPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688B09B2457D0D900D27811 /* NormalPlayerViewController.swift */; };
+		7688B09E2457D0D900D27811 /* NormalPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7688B09C2457D0D900D27811 /* NormalPlayerViewController.xib */; };
+		7688B0A02457DC4D00D27811 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688B09F2457DC4D00D27811 /* SliderView.swift */; };
+		7688B0A42459129800D27811 /* NewFullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688B0A22459129800D27811 /* NewFullViewController.swift */; };
+		7688B0A52459129800D27811 /* NewFullViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7688B0A32459129800D27811 /* NewFullViewController.xib */; };
 		840986BF24515D4800BD7760 /* EGSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986BE24515D4800BD7760 /* EGSliderView.swift */; };
 		840986C124515D6000BD7760 /* EGSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840986C024515D6000BD7760 /* EGSliderView.xib */; };
 		840986C32452826700BD7760 /* EGLandScapeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840986C22452826700BD7760 /* EGLandScapeControlView.swift */; };
@@ -98,6 +103,11 @@
 		7688B0932456D89F00D27811 /* LandScapeControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandScapeControlView.xib; sourceTree = "<group>"; };
 		7688B0972456E09C00D27811 /* PlayerItemObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItemObserver.swift; sourceTree = "<group>"; };
 		7688B0992456E46400D27811 /* FullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullViewController.swift; sourceTree = "<group>"; };
+		7688B09B2457D0D900D27811 /* NormalPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalPlayerViewController.swift; sourceTree = "<group>"; };
+		7688B09C2457D0D900D27811 /* NormalPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NormalPlayerViewController.xib; sourceTree = "<group>"; };
+		7688B09F2457DC4D00D27811 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		7688B0A22459129800D27811 /* NewFullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFullViewController.swift; sourceTree = "<group>"; };
+		7688B0A32459129800D27811 /* NewFullViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewFullViewController.xib; sourceTree = "<group>"; };
 		840986BE24515D4800BD7760 /* EGSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGSliderView.swift; sourceTree = "<group>"; };
 		840986C024515D6000BD7760 /* EGSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EGSliderView.xib; sourceTree = "<group>"; };
 		840986C22452826700BD7760 /* EGLandScapeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGLandScapeControlView.swift; sourceTree = "<group>"; };
@@ -222,6 +232,10 @@
 				766D947F245296670037F0EC /* FullScreenViewController.swift */,
 				766D9480245296670037F0EC /* FullScreenViewController.xib */,
 				840986D02455944300BD7760 /* RateViewController.swift */,
+				7688B09B2457D0D900D27811 /* NormalPlayerViewController.swift */,
+				7688B09C2457D0D900D27811 /* NormalPlayerViewController.xib */,
+				7688B0A22459129800D27811 /* NewFullViewController.swift */,
+				7688B0A32459129800D27811 /* NewFullViewController.xib */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -238,6 +252,7 @@
 				7688B0932456D89F00D27811 /* LandScapeControlView.xib */,
 				7688B0972456E09C00D27811 /* PlayerItemObserver.swift */,
 				7688B0992456E46400D27811 /* FullViewController.swift */,
+				7688B09F2457DC4D00D27811 /* SliderView.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -348,7 +363,9 @@
 			files = (
 				7688B0902456D82600D27811 /* PortraitControlView.xib in Resources */,
 				840986C52452827C00BD7760 /* EGLandScapeControlView.xib in Resources */,
+				7688B0A52459129800D27811 /* NewFullViewController.xib in Resources */,
 				7688B0942456D89F00D27811 /* LandScapeControlView.xib in Resources */,
+				7688B09E2457D0D900D27811 /* NormalPlayerViewController.xib in Resources */,
 				7679FD7E24504B56007CA928 /* LaunchScreen.storyboard in Resources */,
 				766D9482245296670037F0EC /* FullScreenViewController.xib in Resources */,
 				7679FDAE24513751007CA928 /* PlayerViewController.xib in Resources */,
@@ -385,6 +402,7 @@
 				7688B08E2456D78100D27811 /* PortraitControlView.swift in Sources */,
 				766D947E245294070037F0EC /* NavigationViewController.swift in Sources */,
 				7688B0922456D85900D27811 /* LandScapeControlView.swift in Sources */,
+				7688B09D2457D0D900D27811 /* NormalPlayerViewController.swift in Sources */,
 				7679FDAD24513751007CA928 /* PlayerViewController.swift in Sources */,
 				7688B0882456CEAD00D27811 /* GestureController.swift in Sources */,
 				840986D12455944300BD7760 /* RateViewController.swift in Sources */,
@@ -392,6 +410,7 @@
 				7679FD7624504B55007CA928 /* ViewController.swift in Sources */,
 				7688B08C2456D5A700D27811 /* Controlable.swift in Sources */,
 				7688B09A2456E46400D27811 /* FullViewController.swift in Sources */,
+				7688B0A02457DC4D00D27811 /* SliderView.swift in Sources */,
 				7679FDA924512F5C007CA928 /* EGPlayerControlView.swift in Sources */,
 				7688B0862456CB1600D27811 /* Player.swift in Sources */,
 				7679FDA524512AE7007CA928 /* DisplayerLayer.swift in Sources */,
@@ -402,6 +421,7 @@
 				840986BF24515D4800BD7760 /* EGSliderView.swift in Sources */,
 				7688B0982456E09C00D27811 /* PlayerItemObserver.swift in Sources */,
 				7679FDA324512A90007CA928 /* EGPlayer.swift in Sources */,
+				7688B0A42459129800D27811 /* NewFullViewController.swift in Sources */,
 				766D947C24527F840037F0EC /* EGOrientationObserver.swift in Sources */,
 				7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */,
 				766D9481245296670037F0EC /* FullScreenViewController.swift in Sources */,

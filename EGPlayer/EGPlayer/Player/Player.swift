@@ -13,7 +13,6 @@ class Player {
     /// 播放器
     private let player = AVPlayer()
 
-    lazy var fullScreen = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
     /// 竖屏手势控制器
     private let portraitGesture: GestureController
     /// 横屏手势控制器
@@ -35,11 +34,15 @@ class Player {
     private var timeControlStatusObser: NSKeyValueObservation?
 
     deinit {
+        print("Player_deinit")
         removePlayerNotification()
     }
 
-    init<V: UIView>(displayView: DisplayerLayer, portrait: V, landScape: V) where V: Controlable {
+    init<V1: UIView, V2: UIView>(displayView: DisplayerLayer, portrait: V1, landScape: V2) where V1: Controlable, V2: Controlable {
+        displayView.setPlayer(player)
         self.displayView = displayView
+        portrait.player = player
+        landScape.player = player
         self.portraitControlView = portrait
         self.landScapeControlView = landScape
         portraitGesture = GestureController(view: portrait)
@@ -47,9 +50,25 @@ class Player {
 
         itemObserver = PlayerItemObserver(portrait: portrait, landScape: landScape)
 
+        layoutPortraitControl()
         addPlayerNotification()
+        fullScreenAction()
     }
 
+    func setUrl(_ url: String) {
+        guard let url = URL(string: url) else { return }
+        itemObserver.removeObserver()
+        let item = AVPlayerItem(url: url)
+        player.replaceCurrentItem(with: item)
+        itemObserver.addObserver(item)
+    }
+
+    func stop() {
+        player.pause()
+    }
+}
+
+private extension Player {
     func layoutPortraitControl() {
         guard let displayView = displayView else {
             fatalError("displayView is nil")
@@ -61,9 +80,7 @@ class Player {
         portraitControlView.rightAnchor.constraint(equalTo: displayView.rightAnchor).isActive = true
         portraitControlView.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
     }
-}
 
-private extension Player {
     func addPlayerNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinish), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playDidError), name: Notification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
@@ -88,15 +105,18 @@ private extension Player {
         let interval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [unowned self] (time) in
             let currentTime = time.seconds
-            let totalTime = self.player.currentItem?.duration.seconds ?? 0
-            self.portraitControlView.setPlayTime(currentTime, total: totalTime)
-            self.landScapeControlView.setPlayTime(currentTime, total: totalTime)
+//            let totalTime = self.player.currentItem?.duration.seconds ?? 0
+            self.portraitControlView.setPlayTime(currentTime)
+            self.landScapeControlView.setPlayTime(currentTime)
         }
     }
 
     func removePlayerNotification() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
+        if let token = timeObserverToken {
+            player.removeTimeObserver(token)
+        }
         timeControlStatusObser = nil
         timeObserverToken = nil
     }
@@ -116,14 +136,26 @@ private extension Player {
 
     // FIXME: 全屏操作、需要测试
     func fullScreenAction() {
+        displayView?.tempFrame = displayView?.frame ?? .zero
+        let fullScreen = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
+
         portraitControlView.fullScreen = { [unowned self] in
-            self.getCurrentController()?.present(self.fullScreen, animated: true, completion: nil)
+//            self.getCurrentController()?.present(fullScreen, animated: true, completion: nil)
+            self.changeOrientation(fullScreen: fullScreen)
         }
 
-        landScapeControlView.fullScreen = { [unowned self] in
-            self.fullScreen.dismiss(animated: true, completion: nil)
+        landScapeControlView.fullScreen = {
+            fullScreen.dismiss(animated: true, completion: nil)
         }
     }
+
+    func changeOrientation(fullScreen: UIViewController) {
+        let appWindow = UIApplication.shared.delegate?.window
+
+        let customWindow = UIWindow(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        customWindow.rootViewController = fullScreen
+    }
+
 
     func getCurrentController() -> UIViewController? {
          guard let window = UIApplication.shared.windows.first else {
@@ -155,4 +187,10 @@ private extension Player {
          }
          return nextResponder as? UIViewController
      }
+}
+
+extension AVPlayer {
+    var isPlaying: Bool {
+        return timeControlStatus == .playing
+    }
 }
