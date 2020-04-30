@@ -22,12 +22,24 @@ class ViewController: UIViewController {
     }
 
     @IBAction func windowAction() {
+        let keywindow = UIApplication.shared.windows.first
+
         window = UIWindow(frame: UIScreen.main.bounds)
+        if #available(iOS 13.0, *) {
+            if let currentWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                window?.windowScene = currentWindowScene
+            }
+        }
+
         window?.windowLevel = .alert
         window?.isHidden = false
         window?.backgroundColor = UIColor.green
-        window?.rootViewController = NewFullViewController()
-//        window?.makeKeyAndVisible()
+        let full = NewFullViewController {
+            self.window = nil
+            keywindow?.makeKeyAndVisible()
+        }
+        window?.rootViewController = full
+        window?.makeKeyAndVisible()
     }
 
     @IBAction func closeAction() {
@@ -41,6 +53,14 @@ class ViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return false
     }
+
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .landscapeRight
+//    }
+//
+//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+//        return .landscapeRight
+//    }
 }
 
 

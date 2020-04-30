@@ -10,9 +10,24 @@ import UIKit
 
 class NewFullViewController: UIViewController {
 
+    var callback: (() -> Void)?
+
+    init(callback: @escaping () -> Void) {
+        self.callback = callback
+        super.init(nibName: "NewFullViewController", bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.orange
+    }
+
+    @IBAction func closeAction() {
+        callback?()
     }
 
     override var shouldAutorotate: Bool {

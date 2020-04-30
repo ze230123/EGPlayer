@@ -14,7 +14,9 @@ class FullViewController: UIViewController {
 
     lazy var displayView = DisplayerLayer()
 
-    private var controlView: UIView
+    private weak var controlView: UIView?
+
+    private weak var player: AVPlayer?
 
     deinit {
         print("FullViewController_deinit")
@@ -22,11 +24,11 @@ class FullViewController: UIViewController {
 
     init(controlView: UIView, player: AVPlayer, source: DisplayerLayer?) {
         self.controlView = controlView
+        self.player = player
         animator = EGRotateAnimator(view: source)
         super.init(nibName: nil, bundle: nil)
         transitioningDelegate = animator
-        modalPresentationStyle = .overFullScreen
-        displayView.setPlayer(player)
+        modalTransitionStyle = .crossDissolve
     }
 
     required init?(coder: NSCoder) {
@@ -38,7 +40,7 @@ class FullViewController: UIViewController {
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscapeRight
+        return .landscape
     }
 
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
@@ -57,11 +59,25 @@ class FullViewController: UIViewController {
         displayView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         displayView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
+        guard let controlView = controlView else { return }
         controlView.translatesAutoresizingMaskIntoConstraints = false
         displayView.addSubview(controlView)
         controlView.topAnchor.constraint(equalTo: displayView.topAnchor).isActive = true
         controlView.leftAnchor.constraint(equalTo: displayView.leftAnchor).isActive = true
         controlView.rightAnchor.constraint(equalTo: displayView.rightAnchor).isActive = true
         controlView.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        displayView.setPlayer(player)
+        print("全屏将要显示")
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        displayView.setPlayer(nil)
+        controlView?.removeFromSuperview()
+        print("全屏将要消失")
     }
 }

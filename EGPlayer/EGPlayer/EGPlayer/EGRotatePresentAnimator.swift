@@ -35,32 +35,33 @@ class EGRotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 5
+        return 0.2
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toView = transitionContext.view(forKey: .to),
-            let presentedViewController = transitionContext.viewController(forKey: .to),
-            let view = view  else {
+        guard let toView = transitionContext.view(forKey: .to) else {
             return
         }
 
         let containerView = transitionContext.containerView
-
-        let center = containerView.convert(view.tempFrame, from: view)
-        toView.frame = view.bounds
-//        toView.center = center
-        toView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+        toView.frame = containerView.bounds
+        print(toView.frame)
         containerView.addSubview(toView)
-
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
-            toView.transform = .identity
-            toView.frame = containerView.bounds
-            toView.layoutIfNeeded()
-        }) { (_) in
-            let wasCancelled = transitionContext.transitionWasCancelled
-            transitionContext.completeTransition(!wasCancelled)
-        }
+        transitionContext.completeTransition(true)
+//        let center = containerView.convert(view.tempFrame, from: view)
+//        toView.frame = view.bounds
+////        toView.center = center
+//        toView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+//        containerView.addSubview(toView)
+//
+//        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+//            toView.transform = .identity
+//            toView.frame = containerView.bounds
+//            toView.layoutIfNeeded()
+//        }) { (_) in
+//            let wasCancelled = transitionContext.transitionWasCancelled
+//            transitionContext.completeTransition(!wasCancelled)
+//        }
     }
 }
 
@@ -80,16 +81,17 @@ class EGRotateDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             let view = view else {
             return
         }
-        
-        // 计算 fromView的最终位置
-        let smallMovieFrame = transitionContext.containerView.convert(view.tempFrame, from: view.parentView)
-
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .layoutSubviews, animations: {
-            fromView.transform = .identity
-            fromView.frame = smallMovieFrame
-        }) { (_) in
-            fromView.removeFromSuperview()
-            transitionContext.completeTransition(true)
-        }
+        fromView.removeFromSuperview()
+        transitionContext.completeTransition(true)
+//        // 计算 fromView的最终位置
+//        let smallMovieFrame = transitionContext.containerView.convert(view.tempFrame, from: view.parentView)
+//
+//        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .layoutSubviews, animations: {
+//            fromView.transform = .identity
+//            fromView.frame = smallMovieFrame
+//        }) { (_) in
+//            fromView.removeFromSuperview()
+//            transitionContext.completeTransition(true)
+//        }
     }
 }

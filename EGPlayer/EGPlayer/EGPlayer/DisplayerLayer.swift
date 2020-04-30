@@ -14,6 +14,16 @@ class DisplayerLayer: UIView {
     var parentView: UIView?
     var tempFrame: CGRect = .zero
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        prepare()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        prepare()
+    }
+
     var playerLayer: AVPlayerLayer {
         return layer as! AVPlayerLayer
     }
@@ -25,5 +35,18 @@ class DisplayerLayer: UIView {
     func setPlayer(_ player: AVPlayer?) {
         playerLayer.player = player
         playerLayer.videoGravity = .resizeAspect
+    }
+
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            playerLayer.render(in: rendererContext.cgContext)
+        }
+    }
+}
+
+private extension DisplayerLayer {
+    func prepare() {
+        backgroundColor = .black
     }
 }

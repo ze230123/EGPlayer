@@ -69,11 +69,3 @@ extension SliderView {
         slider.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
 }
-
-//class Slider: UISlider {
-//    @IBInspectable var lineHeight: CGFloat = 1.5
-//
-//    override func trackRect(forBounds bounds: CGRect) -> CGRect {
-//        return CGRect(x: bounds.minX, y: (bounds.height - lineHeight) / 2, width: bounds.width, height: lineHeight)
-//    }
-//}

@@ -173,7 +173,7 @@ extension LandScapeControlView {
 
 extension LandScapeControlView {
     func setCurrentTime(_ time: Double) {
-        slider.setValue(Float(time), animated: true)
+        slider.setValue(Float(time), animated: false)
         currentLabel.text = convertTimeSecond(timeSecond: Int(time))
     }
 

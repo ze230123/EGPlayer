@@ -28,6 +28,13 @@ class Player {
     /// 显示画面
     weak var displayView: DisplayerLayer?
 
+    lazy var fullDisplayView: DisplayerLayer = {
+        let view = DisplayerLayer()
+        return view
+    }()
+
+    private var window: UIWindow?
+
     private var currentItem: AVPlayerItem?
 
     private var timeObserverToken: Any?
@@ -36,6 +43,7 @@ class Player {
     deinit {
         print("Player_deinit")
         removePlayerNotification()
+        itemObserver.removeObserver()
     }
 
     init<V1: UIView, V2: UIView>(displayView: DisplayerLayer, portrait: V1, landScape: V2) where V1: Controlable, V2: Controlable {
@@ -136,57 +144,91 @@ private extension Player {
 
     // FIXME: 全屏操作、需要测试
     func fullScreenAction() {
-        displayView?.tempFrame = displayView?.frame ?? .zero
-        let fullScreen = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
-
-        portraitControlView.fullScreen = { [unowned self] in
-//            self.getCurrentController()?.present(fullScreen, animated: true, completion: nil)
-            self.changeOrientation(fullScreen: fullScreen)
+        portraitControlView.fullScreen = { [weak self] in
+            self?.fullScreenAnimate()
         }
 
         landScapeControlView.fullScreen = {
-            fullScreen.dismiss(animated: true, completion: nil)
+            self.smallScreenAnimate()
         }
     }
 
-    func changeOrientation(fullScreen: UIViewController) {
-        let appWindow = UIApplication.shared.delegate?.window
+    func fullScreenAnimate() {
+        let fullScreen = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
+        // TODO: 旋转动画
+        let keywindow = UIApplication.shared.windows.first
 
-        let customWindow = UIWindow(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        customWindow.rootViewController = fullScreen
+        guard let frame = keywindow?.convert(displayView?.frame ?? .zero, from: displayView?.superview) else { return }
+
+        displayView?.setPlayer(nil)
+        fullDisplayView.frame = frame
+        fullDisplayView.setPlayer(player)
+        keywindow?.addSubview(fullDisplayView)
+
+        UIView.animate(withDuration: 5, animations: {
+            self.fullDisplayView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width)
+            self.fullDisplayView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+            self.fullDisplayView.center = keywindow?.center ?? .zero
+        }) { (_) in
+            self.fullDisplayView.isHidden = true
+            self.fullDisplayView.setPlayer(nil)
+            self.getCurrentController()?.present(fullScreen, animated: true, completion: nil)
+        }
     }
 
+    func smallScreenAnimate() {
+        let keywindow = UIApplication.shared.windows.first
+        guard let frame = keywindow?.convert(displayView?.frame ?? .zero, from: displayView?.superview) else { return }
+
+        let tempView = DisplayerLayer(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width))
+        tempView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+        tempView.center = keywindow?.center ?? .zero
+        tempView.setPlayer(player)
+        keywindow?.addSubview(tempView)
+
+        window = nil
+        keywindow?.makeKeyAndVisible()
+
+        UIView.animate(withDuration: 5, animations: {
+            tempView.frame = frame
+            tempView.transform = .identity
+        }) { (_) in
+            tempView.setPlayer(nil)
+            tempView.removeFromSuperview()
+            self.displayView?.setPlayer(self.player)
+        }
+    }
 
     func getCurrentController() -> UIViewController? {
-         guard let window = UIApplication.shared.windows.first else {
-             return nil
-         }
-         var tempView: UIView?
-         for subview in window.subviews.reversed() {
-             if subview.classForCoder.description() == "UILayoutContainerView" {
-                 tempView = subview
-                 break
-             }
-         }
+        guard let window = UIApplication.shared.windows.first else {
+            return nil
+        }
+        var tempView: UIView?
+        for subview in window.subviews.reversed() {
+            if subview.classForCoder.description() == "UILayoutContainerView" {
+                tempView = subview
+                break
+            }
+        }
+        
+        if tempView == nil {
+            tempView = window.subviews.last
+        }
+        
+        var nextResponder = tempView?.next
+        var next: Bool {
+            return !(nextResponder is UIViewController) || nextResponder is UINavigationController || nextResponder is UITabBarController
+        }
 
-         if tempView == nil {
-             tempView = window.subviews.last
-         }
-
-         var nextResponder = tempView?.next
-         var next: Bool {
-             return !(nextResponder is UIViewController) || nextResponder is UINavigationController || nextResponder is UITabBarController
-         }
-
-         while next{
-             tempView = tempView?.subviews.first
-             if tempView == nil {
-                 return nil
-             }
-             nextResponder = tempView!.next
-         }
-         return nextResponder as? UIViewController
-     }
+        while next{
+            tempView = tempView?.subviews.first
+            if tempView == nil {
+                return nil
+            }
+            nextResponder = tempView!.next
+        }
+        return nextResponder as? UIViewController
+    }
 }
 
 extension AVPlayer {

@@ -30,6 +30,10 @@ class GestureController {
 
     private var startPoint: CGPoint = .zero
 
+    deinit {
+        print("GestureController_deinit")
+    }
+
     init(view: UIView & Controlable) {
         self.view = view
         singleTapGesture.require(toFail: doubleTapGesture)
