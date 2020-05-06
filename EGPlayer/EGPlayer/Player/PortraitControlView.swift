@@ -151,6 +151,7 @@ extension PortraitControlView {
     }
 
     @IBAction func fullScreenAction(_ sender: UIButton) {
+        hideAnimate()
         fullScreen?()
     }
 

@@ -27,7 +27,8 @@ class FullViewController: UIViewController {
         self.player = player
         animator = EGRotateAnimator(view: source)
         super.init(nibName: nil, bundle: nil)
-        transitioningDelegate = animator
+//        transitioningDelegate = animator
+        modalPresentationStyle = .fullScreen
         modalTransitionStyle = .crossDissolve
     }
 
@@ -40,11 +41,11 @@ class FullViewController: UIViewController {
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscape
+        return .landscapeRight
     }
 
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .landscapeRight
+        return .portraitUpsideDown
     }
 
     override func viewDidLoad() {

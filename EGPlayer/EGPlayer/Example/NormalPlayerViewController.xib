@@ -30,8 +30,8 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="eN7-i8-4VV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="9jc-2a-sPw"/>
-                <constraint firstItem="eN7-i8-4VV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hKp-ua-CN2"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eN7-i8-4VV" secondAttribute="trailing" id="kTb-A0-VKN"/>
+                <constraint firstItem="eN7-i8-4VV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hKp-ua-CN2"/>
+                <constraint firstAttribute="trailing" secondItem="eN7-i8-4VV" secondAttribute="trailing" id="kTb-A0-VKN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="153"/>

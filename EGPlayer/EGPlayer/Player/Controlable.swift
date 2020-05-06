@@ -35,4 +35,7 @@ protocol Controlable: class {
     func playTimeWillChange()
     func playTimeDidChange(_ value: CGFloat)
     func playTimeEndChange()
+
+    func showAnimate()
+    func hideAnimate()
 }

@@ -151,6 +151,7 @@ extension LandScapeControlView {
     }
 
     @IBAction func fullScreenAction(_ sender: UIButton) {
+        hideAnimate()
         fullScreen?()
     }
 

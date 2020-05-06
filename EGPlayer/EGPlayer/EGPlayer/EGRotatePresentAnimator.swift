@@ -39,15 +39,22 @@ class EGRotatePresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toView = transitionContext.view(forKey: .to) else {
+        guard let toView = transitionContext.view(forKey: .to), let fromView = transitionContext.view(forKey: .from) else {
             return
         }
 
         let containerView = transitionContext.containerView
-        toView.frame = containerView.bounds
-        print(toView.frame)
-        containerView.addSubview(toView)
-        transitionContext.completeTransition(true)
+        fromView.frame = containerView.bounds
+        containerView.addSubview(fromView)
+
+        UIView.animate(withDuration: 5, animations: {
+            self.view?.frame = containerView.bounds
+        }) { (_) in
+//            toView.frame = containerView.bounds
+//            containerView.addSubview(toView)
+            transitionContext.completeTransition(true)
+        }
+
 //        let center = containerView.convert(view.tempFrame, from: view)
 //        toView.frame = view.bounds
 ////        toView.center = center

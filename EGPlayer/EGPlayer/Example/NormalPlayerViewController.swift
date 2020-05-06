@@ -20,7 +20,7 @@ class NormalPlayerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
 
         let url = "http://tb-video.bdstatic.com/tieba-smallvideo-transcode/3612804_e50cb68f52adb3c4c3f6135c0edcc7b0_3.mp4"
         player.setUrl(url)

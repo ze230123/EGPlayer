@@ -36,6 +36,18 @@ class Player {
     }()
 
     private var window: UIWindow?
+    
+    lazy var customWindow: UIWindow = {
+        if #available(iOS 13.0, *) {
+            if let currentWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                return UIWindow(windowScene: currentWindowScene)
+            } else {
+                return UIWindow(frame: .zero)
+            }
+        } else {
+            return UIWindow(frame: .zero)
+        }
+    }()
 
     private var currentItem: AVPlayerItem?
 
@@ -172,62 +184,119 @@ private extension Player {
         }
     }
 
+    // MARK: - 新方案
     func fullScreenAnimate() {
-        print("全屏")
-        let fullView = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
-        fullView.view.isHidden = true
-
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        if #available(iOS 13.0, *) {
-            if let currentWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                self.window?.windowScene = currentWindowScene
-            }
-        }
-        self.window?.windowLevel = .alert
-        self.window?.rootViewController = fullView
-        self.window?.makeKeyAndVisible()
-
-        let keywindow = UIApplication.shared.windows.first
-        tempFrame = displayView.convert(displayView.frame, to: keywindow)
+        let keywindow = UIApplication.shared.keyWindow
+        displayView.frame = displayView.convert(displayView.frame, to: keywindow)
         portraitControlView.removeFromSuperview()
-
-        displayView.removeFromSuperview()
-        displayView.frame = tempFrame
         keywindow?.addSubview(displayView)
 
-        let screenFrame = UIScreen.main.bounds
-        let toFrame = CGRect(x: 0, y: 0, width: screenFrame.height, height: screenFrame.width)
-        UIView.animate(withDuration: 0.3, animations: {
-            self.displayView.frame = toFrame
+        let fullVC = CustomFullViewController()
+        customWindow.rootViewController = fullVC
+
+        let frame = keywindow?.convert(keywindow?.bounds ?? .zero, to: keywindow) ?? .zero
+
+        UIView.animate(withDuration: 1, animations: {
             self.displayView.transform = CGAffineTransform(rotationAngle: .pi / 2)
-            self.displayView.center = keywindow?.center ?? .zero
+            self.displayView.frame = frame
         }) { (_) in
-            fullView.view.isHidden = false
+            self.layoutlandScapeControl()
         }
     }
 
     func smallScreenAnimate() {
-        print("小屏")
-        let keywindow = UIApplication.shared.windows.first
-        window?.rootViewController?.view.isHidden = true
+        let keywindow = UIApplication.shared.keyWindow
 
-        UIView.animate(withDuration: 0.3, animations: {
+        let fullVC = SamllViewController()
+        customWindow.rootViewController = fullVC
+
+        let frame = contentView?.convert(contentView?.bounds ?? .zero, to: keywindow) ?? .zero
+
+        UIView.animate(withDuration: 1, animations: {
             self.displayView.transform = .identity
-            self.displayView.frame = self.tempFrame
+            self.displayView.frame = frame
         }) { (_) in
-            self.displayView.removeFromSuperview()
             self.layoutDisplayerView()
             self.layoutPortraitControl()
-
-            self.window?.rootViewController?.view.isHidden = false
-            self.window = nil
-            keywindow?.makeKeyAndVisible()
         }
     }
+    
+    // MARK: - window方案
+//    func fullScreenAnimate() {
+//        print("全屏")
+//        let fullView = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
+//        fullView.view.isHidden = true
+//
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        if #available(iOS 13.0, *) {
+//            if let currentWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+//                self.window?.windowScene = currentWindowScene
+//            }
+//        }
+////        self.window?.isHidden = true
+//        self.window?.windowLevel = .alert
+//        self.window?.rootViewController = fullView
+//        self.window?.makeKeyAndVisible()
+//
+//        let keywindow = UIApplication.shared.windows.first
+//        tempFrame = displayView.convert(displayView.frame, to: keywindow)
+//        portraitControlView.removeFromSuperview()
+//
+//        displayView.removeFromSuperview()
+//        displayView.frame = tempFrame
+//        keywindow?.addSubview(displayView)
+//
+//        let screenFrame = UIScreen.main.bounds
+//        let toFrame = CGRect(x: 0, y: 0, width: screenFrame.height, height: screenFrame.width)
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.displayView.frame = toFrame
+//            self.displayView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+//            self.displayView.center = keywindow?.center ?? .zero
+//        }) { (_) in
+//            self.window?.isHidden = false
+//            fullView.view.isHidden = false
+//        }
+//    }
+//
+//    func smallScreenAnimate() {
+//        print("小屏")
+//
+//        self.window = nil
+//        UIApplication.shared.windows.first?.makeKeyAndVisible()
+//
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.displayView.transform = .identity
+//            self.displayView.frame = self.tempFrame
+//        }) { (_) in
+//            self.displayView.removeFromSuperview()
+//            self.layoutDisplayerView()
+//            self.layoutPortraitControl()
+//        }
+//    }
 }
 
 extension AVPlayer {
     var isPlaying: Bool {
         return timeControlStatus == .playing
+    }
+}
+
+class CustomFullViewController: UIViewController {
+    override var shouldAutorotate: Bool {
+        return true
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscapeRight
+    }
+}
+
+class SamllViewController: UIViewController {
+    override var shouldAutorotate: Bool {
+        return true
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
 }
