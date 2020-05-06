@@ -49,8 +49,6 @@ class FullViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
 
         displayView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(displayView)

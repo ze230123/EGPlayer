@@ -26,7 +26,9 @@ class Player {
     private var landScapeControlView: (UIView & Controlable)
 
     /// 显示画面
-    weak var displayView: DisplayerLayer?
+    private var displayView: DisplayerLayer = DisplayerLayer()
+
+    private weak var contentView: UIView?
 
     lazy var fullDisplayView: DisplayerLayer = {
         let view = DisplayerLayer()
@@ -40,15 +42,16 @@ class Player {
     private var timeObserverToken: Any?
     private var timeControlStatusObser: NSKeyValueObservation?
 
+    private var tempFrame: CGRect = .zero
+
     deinit {
         print("Player_deinit")
         removePlayerNotification()
         itemObserver.removeObserver()
     }
 
-    init<V1: UIView, V2: UIView>(displayView: DisplayerLayer, portrait: V1, landScape: V2) where V1: Controlable, V2: Controlable {
-        displayView.setPlayer(player)
-        self.displayView = displayView
+    init<V1: UIView, V2: UIView>(contentView: UIView, portrait: V1, landScape: V2) where V1: Controlable, V2: Controlable {
+        self.contentView = contentView
         portrait.player = player
         landScape.player = player
         self.portraitControlView = portrait
@@ -58,9 +61,12 @@ class Player {
 
         itemObserver = PlayerItemObserver(portrait: portrait, landScape: landScape)
 
+        layoutDisplayerView()
         layoutPortraitControl()
         addPlayerNotification()
         fullScreenAction()
+
+        self.displayView.setPlayer(player)
     }
 
     func setUrl(_ url: String) {
@@ -77,16 +83,29 @@ class Player {
 }
 
 private extension Player {
+    func layoutDisplayerView() {
+        guard let contentView = contentView else { return }
+        displayView.frame = contentView.bounds
+        displayView.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin, .flexibleBottomMargin, .flexibleRightMargin, .flexibleWidth, .flexibleHeight]
+        contentView.addSubview(displayView)
+    }
+
     func layoutPortraitControl() {
-        guard let displayView = displayView else {
-            fatalError("displayView is nil")
-        }
         portraitControlView.translatesAutoresizingMaskIntoConstraints = false
         displayView.addSubview(portraitControlView)
         portraitControlView.topAnchor.constraint(equalTo: displayView.topAnchor).isActive = true
         portraitControlView.leftAnchor.constraint(equalTo: displayView.leftAnchor).isActive = true
         portraitControlView.rightAnchor.constraint(equalTo: displayView.rightAnchor).isActive = true
         portraitControlView.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
+    }
+
+    func layoutlandScapeControl() {
+        landScapeControlView.translatesAutoresizingMaskIntoConstraints = false
+        displayView.addSubview(landScapeControlView)
+        landScapeControlView.topAnchor.constraint(equalTo: displayView.topAnchor).isActive = true
+        landScapeControlView.leftAnchor.constraint(equalTo: displayView.leftAnchor).isActive = true
+        landScapeControlView.rightAnchor.constraint(equalTo: displayView.rightAnchor).isActive = true
+        landScapeControlView.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
     }
 
     func addPlayerNotification() {
@@ -154,80 +173,56 @@ private extension Player {
     }
 
     func fullScreenAnimate() {
-        let fullScreen = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
-        // TODO: 旋转动画
+        print("全屏")
+        let fullView = FullViewController(controlView: landScapeControlView, player: player, source: displayView)
+        fullView.view.isHidden = true
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        if #available(iOS 13.0, *) {
+            if let currentWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                self.window?.windowScene = currentWindowScene
+            }
+        }
+        self.window?.windowLevel = .alert
+        self.window?.rootViewController = fullView
+        self.window?.makeKeyAndVisible()
+
         let keywindow = UIApplication.shared.windows.first
+        tempFrame = displayView.convert(displayView.frame, to: keywindow)
+        portraitControlView.removeFromSuperview()
 
-        guard let frame = keywindow?.convert(displayView?.frame ?? .zero, from: displayView?.superview) else { return }
+        displayView.removeFromSuperview()
+        displayView.frame = tempFrame
+        keywindow?.addSubview(displayView)
 
-        displayView?.setPlayer(nil)
-        fullDisplayView.frame = frame
-        fullDisplayView.setPlayer(player)
-        keywindow?.addSubview(fullDisplayView)
-
-        UIView.animate(withDuration: 5, animations: {
-            self.fullDisplayView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width)
-            self.fullDisplayView.transform = CGAffineTransform(rotationAngle: .pi / 2)
-            self.fullDisplayView.center = keywindow?.center ?? .zero
+        let screenFrame = UIScreen.main.bounds
+        let toFrame = CGRect(x: 0, y: 0, width: screenFrame.height, height: screenFrame.width)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.displayView.frame = toFrame
+            self.displayView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+            self.displayView.center = keywindow?.center ?? .zero
         }) { (_) in
-            self.fullDisplayView.isHidden = true
-            self.fullDisplayView.setPlayer(nil)
-            self.getCurrentController()?.present(fullScreen, animated: true, completion: nil)
+            fullView.view.isHidden = false
         }
     }
 
     func smallScreenAnimate() {
+        print("小屏")
         let keywindow = UIApplication.shared.windows.first
-        guard let frame = keywindow?.convert(displayView?.frame ?? .zero, from: displayView?.superview) else { return }
+        window?.rootViewController?.view.isHidden = true
 
-        let tempView = DisplayerLayer(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width))
-        tempView.transform = CGAffineTransform(rotationAngle: .pi / 2)
-        tempView.center = keywindow?.center ?? .zero
-        tempView.setPlayer(player)
-        keywindow?.addSubview(tempView)
-
-        window = nil
-        keywindow?.makeKeyAndVisible()
-
-        UIView.animate(withDuration: 5, animations: {
-            tempView.frame = frame
-            tempView.transform = .identity
+        UIView.animate(withDuration: 0.3, animations: {
+            self.displayView.transform = .identity
+            self.displayView.frame = self.tempFrame
         }) { (_) in
-            tempView.setPlayer(nil)
-            tempView.removeFromSuperview()
-            self.displayView?.setPlayer(self.player)
-        }
-    }
+            self.displayView.removeFromSuperview()
+            self.layoutDisplayerView()
+            self.layoutPortraitControl()
 
-    func getCurrentController() -> UIViewController? {
-        guard let window = UIApplication.shared.windows.first else {
-            return nil
+            self.window?.rootViewController?.view.isHidden = false
+            self.window = nil
+            keywindow?.makeKeyAndVisible()
         }
-        var tempView: UIView?
-        for subview in window.subviews.reversed() {
-            if subview.classForCoder.description() == "UILayoutContainerView" {
-                tempView = subview
-                break
-            }
-        }
-        
-        if tempView == nil {
-            tempView = window.subviews.last
-        }
-        
-        var nextResponder = tempView?.next
-        var next: Bool {
-            return !(nextResponder is UIViewController) || nextResponder is UINavigationController || nextResponder is UITabBarController
-        }
-
-        while next{
-            tempView = tempView?.subviews.first
-            if tempView == nil {
-                return nil
-            }
-            nextResponder = tempView!.next
-        }
-        return nextResponder as? UIViewController
     }
 }
 

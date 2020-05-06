@@ -9,9 +9,9 @@
 import UIKit
 
 class NormalPlayerViewController: UIViewController {
-    @IBOutlet weak var displayView: DisplayerLayer!
+    @IBOutlet weak var displayView: UIView!
 
-    lazy var player = Player(displayView: displayView, portrait: PortraitControlView(), landScape: LandScapeControlView())
+    lazy var player = Player(contentView: displayView, portrait: PortraitControlView(), landScape: LandScapeControlView())
 
     deinit {
         player.stop()

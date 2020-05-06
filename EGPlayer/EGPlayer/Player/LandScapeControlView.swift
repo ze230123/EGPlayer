@@ -151,7 +151,6 @@ extension LandScapeControlView {
     }
 
     @IBAction func fullScreenAction(_ sender: UIButton) {
-        print("全屏")
         fullScreen?()
     }
 

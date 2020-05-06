@@ -151,7 +151,6 @@ extension PortraitControlView {
     }
 
     @IBAction func fullScreenAction(_ sender: UIButton) {
-        print("全屏")
         fullScreen?()
     }
 
