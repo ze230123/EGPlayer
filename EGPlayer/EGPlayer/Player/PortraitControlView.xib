@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PortraitControlView" customModule="EGPlayer" customModuleProvider="target">
             <connections>
                 <outlet property="bottomView" destination="aXI-FN-XDH" id="GZL-4x-nZ5"/>
+                <outlet property="bufferSlider" destination="VAn-a8-pYi" id="6nw-jf-Eji"/>
                 <outlet property="currentLabel" destination="jGI-CB-hno" id="yRX-G3-fnk"/>
                 <outlet property="indicatorView" destination="uAO-ks-67l" id="l91-6G-aFZ"/>
                 <outlet property="playButton" destination="YKD-Pn-rO3" id="SJX-7a-7wK"/>
-                <outlet property="progressView" destination="2Rb-os-icP" id="jy5-Sv-Rgf"/>
                 <outlet property="slider" destination="a6B-iT-Q5a" id="cUj-9A-sIT"/>
                 <outlet property="topView" destination="28x-zU-Voh" id="qeY-Tq-Fox"/>
                 <outlet property="totalLabel" destination="hFv-tM-IiL" id="iLn-Rc-r3Y"/>
@@ -65,16 +65,18 @@
                         <view contentMode="scaleToFill" horizontalHuggingPriority="240" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="740" translatesAutoresizingMaskIntoConstraints="NO" id="cGv-dF-OWa">
                             <rect key="frame" x="84.666666666666671" y="7" width="205.66666666666663" height="30"/>
                             <subviews>
-                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Rb-os-icP">
-                                    <rect key="frame" x="0.0" y="13.666666666666657" width="205.66666666666666" height="2.6666666666666679"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="2.5" id="ZHf-v2-0il"/>
-                                    </constraints>
-                                    <color key="progressTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="trackTintColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                </progressView>
-                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-iT-Q5a">
-                                    <rect key="frame" x="-2" y="-0.66666666666665719" width="209.66666666666666" height="31"/>
+                                <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-a8-pYi" customClass="Slider" customModule="EGPlayer" customModuleProvider="target">
+                                    <rect key="frame" x="-2" y="0.0" width="209.66666666666666" height="31"/>
+                                    <color key="minimumTrackTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                </slider>
+                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-iT-Q5a" customClass="Slider" customModule="EGPlayer" customModuleProvider="target">
+                                    <rect key="frame" x="-2" y="0.0" width="209.66666666666666" height="31"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="buffer">
+                                            <real key="value" value="0.5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="sliderTouchDown:" destination="-1" eventType="touchDown" id="R7N-X7-pJW"/>
                                         <action selector="sliderTouchUpInSide:" destination="-1" eventType="touchUpOutside" id="Ojw-Wy-oRl"/>
@@ -85,13 +87,13 @@
                                 </slider>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="2Rb-os-icP" secondAttribute="trailing" id="2ed-Ka-GzL"/>
                                 <constraint firstItem="a6B-iT-Q5a" firstAttribute="leading" secondItem="cGv-dF-OWa" secondAttribute="leading" id="4vo-hw-Orc"/>
-                                <constraint firstItem="2Rb-os-icP" firstAttribute="centerY" secondItem="cGv-dF-OWa" secondAttribute="centerY" id="DdF-eZ-Wvh"/>
                                 <constraint firstAttribute="height" constant="30" id="Km0-Vj-DjV"/>
                                 <constraint firstAttribute="trailing" secondItem="a6B-iT-Q5a" secondAttribute="trailing" id="Rnn-WM-Y7w"/>
-                                <constraint firstItem="2Rb-os-icP" firstAttribute="leading" secondItem="cGv-dF-OWa" secondAttribute="leading" id="p21-x4-LlD"/>
-                                <constraint firstItem="a6B-iT-Q5a" firstAttribute="centerY" secondItem="cGv-dF-OWa" secondAttribute="centerY" constant="-0.69999999999999996" id="rmr-LL-W7c"/>
+                                <constraint firstAttribute="trailing" secondItem="VAn-a8-pYi" secondAttribute="trailing" id="d2o-Ef-KDm"/>
+                                <constraint firstItem="VAn-a8-pYi" firstAttribute="leading" secondItem="cGv-dF-OWa" secondAttribute="leading" id="pdT-x6-eJp"/>
+                                <constraint firstItem="VAn-a8-pYi" firstAttribute="centerY" secondItem="cGv-dF-OWa" secondAttribute="centerY" id="qfQ-4Q-Cdj"/>
+                                <constraint firstItem="a6B-iT-Q5a" firstAttribute="centerY" secondItem="cGv-dF-OWa" secondAttribute="centerY" id="rmr-LL-W7c"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DU-dm-YwJ">

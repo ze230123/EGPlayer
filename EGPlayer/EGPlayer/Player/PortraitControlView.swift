@@ -10,8 +10,8 @@ import UIKit
 import AVFoundation
 
 class PortraitControlView: UIView, Controlable, NibLoadable {
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var bufferSlider: Slider!
+    @IBOutlet weak var slider: Slider!
 
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
@@ -86,7 +86,7 @@ class PortraitControlView: UIView, Controlable, NibLoadable {
         print("设置亮度", brightness)
     }
 
-    func playerDidChangedState(_ state: EGPlayer.State) {
+    func playerDidChangedState(_ state: PlayerState) {
         switch state {
         case .loading, .cacheing:
             indicatorView.isHidden = false
@@ -106,7 +106,7 @@ class PortraitControlView: UIView, Controlable, NibLoadable {
     }
 
     func setBuffer(_ buffer: Double) {
-        progressView.progress = Float(buffer)
+        bufferSlider.value = Float(buffer)
     }
 
     func setPlayTime(_ time: Double) {
@@ -136,8 +136,10 @@ extension PortraitControlView {
     func prepare() {
         playButton.isSelected = player?.isPlaying ?? false
 
+        bufferSlider.setThumbImage(UIImage(), for: .normal)
+
         slider.maximumTrackTintColor = UIColor.clear
-        slider.setMinimumTrackImage(UIColor(hex: 0xEF3D33).asImage(CGSize(width: 20, height: 1.5)), for: .normal)
+        slider.minimumTrackTintColor = UIColor(hex: 0xEF3D33)
         slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
     }
 

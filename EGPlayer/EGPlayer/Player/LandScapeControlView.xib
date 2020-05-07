@@ -69,7 +69,7 @@
                         <view contentMode="scaleToFill" horizontalHuggingPriority="240" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="740" translatesAutoresizingMaskIntoConstraints="NO" id="csF-Kh-GHh">
                             <rect key="frame" x="118.5" y="17" width="659" height="30"/>
                             <subviews>
-                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="k56-5u-cEC">
+                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="k56-5u-cEC">
                                     <rect key="frame" x="0.0" y="14" width="659" height="2.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="2.5" id="it7-N4-cbK"/>
@@ -77,8 +77,13 @@
                                     <color key="progressTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="trackTintColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 </progressView>
-                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eZI-M5-PJJ">
+                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eZI-M5-PJJ" customClass="Slider" customModule="EGPlayer" customModuleProvider="target">
                                     <rect key="frame" x="-2" y="-0.5" width="663" height="31"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="buffer">
+                                            <real key="value" value="0.5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="sliderTouchDown:" destination="-1" eventType="touchDown" id="aX6-dF-rds"/>
                                         <action selector="sliderTouchUpInSide:" destination="-1" eventType="touchUpOutside" id="lhD-8h-nUB"/>
@@ -89,7 +94,7 @@
                                 </slider>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="eZI-M5-PJJ" firstAttribute="centerY" secondItem="csF-Kh-GHh" secondAttribute="centerY" constant="-0.69999999999999996" id="A8g-rw-f7G"/>
+                                <constraint firstItem="eZI-M5-PJJ" firstAttribute="centerY" secondItem="csF-Kh-GHh" secondAttribute="centerY" constant="-0.59999999999999998" id="A8g-rw-f7G"/>
                                 <constraint firstAttribute="trailing" secondItem="k56-5u-cEC" secondAttribute="trailing" id="HX0-62-GZ1"/>
                                 <constraint firstItem="k56-5u-cEC" firstAttribute="centerY" secondItem="csF-Kh-GHh" secondAttribute="centerY" id="KDP-gN-KIf"/>
                                 <constraint firstAttribute="trailing" secondItem="eZI-M5-PJJ" secondAttribute="trailing" id="Qfd-ys-tVm"/>

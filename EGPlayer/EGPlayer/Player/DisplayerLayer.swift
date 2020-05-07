@@ -11,9 +11,6 @@ import AVFoundation
 
 /// 显示画面View
 class DisplayerLayer: UIView {
-    var parentView: UIView?
-    var tempFrame: CGRect = .zero
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         prepare()

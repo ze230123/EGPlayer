@@ -25,7 +25,7 @@ protocol Controlable: class {
     func setBrightness(_ brightness: CGFloat)
 
     // 播放状态改变
-    func playerDidChangedState(_ state: EGPlayer.State)
+    func playerDidChangedState(_ state: PlayerState)
     // 设置播放时间，视频总时长
     func setPlayTime(_ time: Double)
     func setTotalTime(_ time: Double)
@@ -38,4 +38,8 @@ protocol Controlable: class {
 
     func showAnimate()
     func hideAnimate()
+}
+
+enum PlayerState {
+    case loading, readyToPlay, playing, paused, playEnd, cacheing, failed(Error)
 }

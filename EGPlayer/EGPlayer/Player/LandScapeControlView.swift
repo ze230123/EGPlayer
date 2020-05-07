@@ -11,7 +11,7 @@ import AVFoundation
 
 class LandScapeControlView: UIView, Controlable, NibLoadable {
     @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var slider: Slider!
 
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
@@ -32,7 +32,7 @@ class LandScapeControlView: UIView, Controlable, NibLoadable {
     private var currentSecond: CGFloat = 0
 
     deinit {
-        print("PortraitControlView_deinit")
+        print("LandScapeControlView_deinit")
     }
 
     override init(frame: CGRect) {
@@ -86,7 +86,7 @@ class LandScapeControlView: UIView, Controlable, NibLoadable {
         print("设置亮度", brightness)
     }
 
-    func playerDidChangedState(_ state: EGPlayer.State) {
+    func playerDidChangedState(_ state: PlayerState) {
         switch state {
         case .loading, .cacheing:
             indicatorView.isHidden = false
@@ -137,7 +137,7 @@ extension LandScapeControlView {
         playButton.isSelected = player?.isPlaying ?? false
 
         slider.maximumTrackTintColor = UIColor.clear
-        slider.setMinimumTrackImage(UIColor(hex: 0xEF3D33).asImage(CGSize(width: 20, height: 1.5)), for: .normal)
+        slider.minimumTrackTintColor = UIColor(hex: 0xEF3D33)
         slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
     }
 
