@@ -17,6 +17,9 @@
 		7679FD8924504B56007CA928 /* EGPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD8824504B56007CA928 /* EGPlayerTests.swift */; };
 		7679FD9424504B56007CA928 /* EGPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD9324504B56007CA928 /* EGPlayerUITests.swift */; };
 		7685CF8C2463B9FB00B627FE /* DisplayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685CF8B2463B9FB00B627FE /* DisplayerLayer.swift */; };
+		7685CF902463BB9600B627FE /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685CF8F2463BB9600B627FE /* PlayerItem.swift */; };
+		7685CF962463E6E800B627FE /* PlayerTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685CF952463E6E800B627FE /* PlayerTipsView.swift */; };
+		7685CF982463E6F100B627FE /* PlayerTipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7685CF972463E6F100B627FE /* PlayerTipsView.xib */; };
 		7688B0862456CB1600D27811 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688B0852456CB1600D27811 /* Player.swift */; };
 		7688B0882456CEAD00D27811 /* GestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688B0872456CEAD00D27811 /* GestureController.swift */; };
 		7688B08C2456D5A700D27811 /* Controlable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688B08B2456D5A700D27811 /* Controlable.swift */; };
@@ -66,6 +69,9 @@
 		7679FD9324504B56007CA928 /* EGPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGPlayerUITests.swift; sourceTree = "<group>"; };
 		7679FD9524504B56007CA928 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7685CF8B2463B9FB00B627FE /* DisplayerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayerLayer.swift; sourceTree = "<group>"; };
+		7685CF8F2463BB9600B627FE /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
+		7685CF952463E6E800B627FE /* PlayerTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTipsView.swift; sourceTree = "<group>"; };
+		7685CF972463E6F100B627FE /* PlayerTipsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerTipsView.xib; sourceTree = "<group>"; };
 		7688B0852456CB1600D27811 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		7688B0872456CEAD00D27811 /* GestureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureController.swift; sourceTree = "<group>"; };
 		7688B08B2456D5A700D27811 /* Controlable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controlable.swift; sourceTree = "<group>"; };
@@ -185,6 +191,9 @@
 				7688B0932456D89F00D27811 /* LandScapeControlView.xib */,
 				7688B0972456E09C00D27811 /* PlayerItemObserver.swift */,
 				7688B09F2457DC4D00D27811 /* SliderView.swift */,
+				7685CF8F2463BB9600B627FE /* PlayerItem.swift */,
+				7685CF952463E6E800B627FE /* PlayerTipsView.swift */,
+				7685CF972463E6F100B627FE /* PlayerTipsView.xib */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -296,6 +305,7 @@
 				7688B0902456D82600D27811 /* PortraitControlView.xib in Resources */,
 				7688B0A52459129800D27811 /* NewFullViewController.xib in Resources */,
 				7688B0942456D89F00D27811 /* LandScapeControlView.xib in Resources */,
+				7685CF982463E6F100B627FE /* PlayerTipsView.xib in Resources */,
 				7688B09E2457D0D900D27811 /* NormalPlayerViewController.xib in Resources */,
 				7679FD7E24504B56007CA928 /* LaunchScreen.storyboard in Resources */,
 				7679FD7B24504B56007CA928 /* Assets.xcassets in Resources */,
@@ -326,10 +336,12 @@
 			files = (
 				7688B08E2456D78100D27811 /* PortraitControlView.swift in Sources */,
 				766D947E245294070037F0EC /* NavigationViewController.swift in Sources */,
+				7685CF902463BB9600B627FE /* PlayerItem.swift in Sources */,
 				7688B0922456D85900D27811 /* LandScapeControlView.swift in Sources */,
 				7688B09D2457D0D900D27811 /* NormalPlayerViewController.swift in Sources */,
 				7688B0882456CEAD00D27811 /* GestureController.swift in Sources */,
 				7679FD7624504B55007CA928 /* ViewController.swift in Sources */,
+				7685CF962463E6E800B627FE /* PlayerTipsView.swift in Sources */,
 				7688B08C2456D5A700D27811 /* Controlable.swift in Sources */,
 				7688B0A02457DC4D00D27811 /* SliderView.swift in Sources */,
 				7688B0862456CB1600D27811 /* Player.swift in Sources */,

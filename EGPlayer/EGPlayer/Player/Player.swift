@@ -25,18 +25,13 @@ class Player {
     /// 手机横屏时的 控制view
     private var landScapeControlView: (UIView & Controlable)
 
+    private var tipsView: (UIView & TipsControlable)
+
     /// 显示画面
     private var displayView: DisplayerLayer = DisplayerLayer()
 
     private weak var contentView: UIView?
 
-    lazy var fullDisplayView: DisplayerLayer = {
-        let view = DisplayerLayer()
-        return view
-    }()
-
-    private var window: UIWindow?
-    
     lazy var customWindow: UIWindow = {
         if #available(iOS 13.0, *) {
             if let currentWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
@@ -49,12 +44,12 @@ class Player {
         }
     }()
 
-    private var currentItem: AVPlayerItem?
-
     private var timeObserverToken: Any?
     private var timeControlStatusObser: NSKeyValueObservation?
 
-    private var tempFrame: CGRect = .zero
+    private var currentItem: PlayerItem?
+
+    private var isFullScreen: Bool = false
 
     deinit {
         print("Player_deinit")
@@ -62,10 +57,11 @@ class Player {
         itemObserver.removeObserver()
     }
 
-    init<V1: UIView, V2: UIView>(contentView: UIView, portrait: V1, landScape: V2) where V1: Controlable, V2: Controlable {
+    init<V1: UIView, V2: UIView, V3: UIView>(contentView: UIView, portrait: V1, landScape: V2, tipsView: V3) where V1: Controlable, V2: Controlable, V3: TipsControlable {
         self.contentView = contentView
         portrait.player = player
         landScape.player = player
+        self.tipsView = tipsView
         self.portraitControlView = portrait
         self.landScapeControlView = landScape
         portraitGesture = GestureController(view: portrait)
@@ -81,12 +77,14 @@ class Player {
         self.displayView.setPlayer(player)
     }
 
-    func setUrl(_ url: String) {
-        guard let url = URL(string: url) else { return }
+    func setItem(_ item: PlayerItem?) {
+        guard let item = item, let url = URL(string: item.url) else { return }
+        self.currentItem = item
+
         itemObserver.removeObserver()
-        let item = AVPlayerItem(url: url)
-        player.replaceCurrentItem(with: item)
-        itemObserver.addObserver(item)
+        let avitem = AVPlayerItem(url: url)
+        player.replaceCurrentItem(with: avitem)
+        itemObserver.addObserver(avitem)
     }
 
     func stop() {
@@ -120,6 +118,16 @@ private extension Player {
         landScapeControlView.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
     }
 
+    func layoutTipsView() {
+        tipsView.isFullScreen = isFullScreen
+        tipsView.translatesAutoresizingMaskIntoConstraints = false
+        displayView.addSubview(tipsView)
+        tipsView.topAnchor.constraint(equalTo: displayView.topAnchor).isActive = true
+        tipsView.leftAnchor.constraint(equalTo: displayView.leftAnchor).isActive = true
+        tipsView.rightAnchor.constraint(equalTo: displayView.rightAnchor).isActive = true
+        tipsView.bottomAnchor.constraint(equalTo: displayView.bottomAnchor).isActive = true
+    }
+
     func addPlayerNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinish), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playDidError), name: Notification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
@@ -144,9 +152,16 @@ private extension Player {
         let interval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [unowned self] (time) in
             let currentTime = time.seconds
-//            let totalTime = self.player.currentItem?.duration.seconds ?? 0
             self.portraitControlView.setPlayTime(currentTime)
             self.landScapeControlView.setPlayTime(currentTime)
+
+            guard let item = self.currentItem else { return }
+
+            if item.state != .normal && item.tryTime != 0 && item.tryTime <= currentTime {
+                self.tipsView.setState(item.state)
+                self.player.pause()
+                self.layoutTipsView()
+            }
         }
     }
 
@@ -179,8 +194,53 @@ private extension Player {
             self?.fullScreenAnimate()
         }
 
-        landScapeControlView.fullScreen = {
-            self.smallScreenAnimate()
+        landScapeControlView.fullScreen = { [weak self] in
+            self?.smallScreenAnimate()
+        }
+
+        tipsView.fullScreen = { [weak self] isFullScreen in
+            if isFullScreen {
+                self?.tipsSmallScreenAnimate()
+            } else {
+                self?.tipsFullScrenAnimate()
+            }
+        }
+    }
+
+    func tipsFullScrenAnimate() {
+        let keywindow = UIApplication.shared.keyWindow
+        displayView.frame = displayView.convert(displayView.frame, to: keywindow)
+        keywindow?.addSubview(displayView)
+
+        let fullVC = CustomFullViewController()
+        customWindow.rootViewController = fullVC
+
+        let frame = keywindow?.convert(keywindow?.bounds ?? .zero, to: keywindow) ?? .zero
+
+        UIView.animate(withDuration: 1, animations: {
+            self.displayView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+            self.displayView.frame = frame
+            self.displayView.layoutIfNeeded()
+        }) { (_) in
+            self.tipsView.isFullScreen = true
+        }
+    }
+
+    func tipsSmallScreenAnimate() {
+        let keywindow = UIApplication.shared.keyWindow
+
+        let fullVC = SamllViewController()
+        customWindow.rootViewController = fullVC
+
+        let frame = contentView?.convert(contentView?.bounds ?? .zero, to: keywindow) ?? .zero
+
+        UIView.animate(withDuration: 1, animations: {
+            self.displayView.transform = .identity
+            self.displayView.frame = frame
+            self.displayView.layoutIfNeeded()
+        }) { (_) in
+            self.layoutDisplayerView()
+            self.tipsView.isFullScreen = false
         }
     }
 
@@ -201,6 +261,7 @@ private extension Player {
             self.displayView.frame = frame
         }) { (_) in
             self.layoutlandScapeControl()
+            self.isFullScreen = true
         }
     }
 
@@ -218,6 +279,7 @@ private extension Player {
         }) { (_) in
             self.layoutDisplayerView()
             self.layoutPortraitControl()
+            self.isFullScreen = false
         }
     }
 }

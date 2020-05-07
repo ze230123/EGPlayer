@@ -11,7 +11,7 @@ import UIKit
 class NormalPlayerViewController: UIViewController {
     @IBOutlet weak var displayView: UIView!
 
-    lazy var player = Player(contentView: displayView, portrait: PortraitControlView(), landScape: LandScapeControlView())
+    lazy var player = Player(contentView: displayView, portrait: PortraitControlView(), landScape: LandScapeControlView(), tipsView: PlayerTipsView())
 
     deinit {
         player.stop()
@@ -21,7 +21,8 @@ class NormalPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let url = "http://tb-video.bdstatic.com/tieba-smallvideo-transcode/3612804_e50cb68f52adb3c4c3f6135c0edcc7b0_3.mp4"
-        player.setUrl(url)
+        let item = PlayerItem(url: url, tryTime: 5, state: .buy)
+        player.setItem(item)
     }
 
     override var shouldAutorotate: Bool {

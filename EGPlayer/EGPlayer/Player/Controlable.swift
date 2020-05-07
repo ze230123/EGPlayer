@@ -41,5 +41,13 @@ protocol Controlable: class {
 }
 
 enum PlayerState {
-    case loading, readyToPlay, playing, paused, playEnd, cacheing, failed(Error)
+    case loading, readyToPlay, playing, paused, playEnd, cacheing, failed(Error), buy, vip
+}
+
+protocol TipsControlable: class {
+    // 全屏事件
+    var fullScreen: ((Bool) -> Void)? { get set }
+    var isFullScreen: Bool { get set }
+
+    func setState(_ state: PlayerItem.State)
 }

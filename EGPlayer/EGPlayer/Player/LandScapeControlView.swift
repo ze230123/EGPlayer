@@ -22,6 +22,10 @@ class LandScapeControlView: UIView, Controlable, NibLoadable {
 
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
 
+    @IBOutlet weak var tipsView: UIView!
+    @IBOutlet weak var tipsLabel: UILabel!
+    @IBOutlet weak var tipsButton: UIButton!
+
     var isDragSlider: Bool = false
     var isShowToolBar: Bool = false
 
@@ -100,6 +104,14 @@ class LandScapeControlView: UIView, Controlable, NibLoadable {
         case .playEnd:
             player?.seek(to: .zero)
             playButton.isSelected = false
+        case .buy:
+            player?.pause()
+            tipsView.isHidden = false
+            tipsLabel.text = "该内容需购买后观看"
+        case .vip:
+            player?.pause()
+            tipsView.isHidden = false
+            tipsLabel.text = "该内容需购买VIP会员后观看"
         case .failed(let error):
             break
         }
