@@ -41,7 +41,7 @@ protocol Controlable: class {
 }
 
 enum PlayerState {
-    case loading, readyToPlay, playing, paused, playEnd, cacheing, failed(Error), buy, vip
+    case loading, readyToPlay, playing, paused, playEnd, cacheing, failed(Error)
 }
 
 protocol TipsControlable: class {

@@ -16,9 +16,6 @@
                 <outlet property="indicatorView" destination="uAO-ks-67l" id="l91-6G-aFZ"/>
                 <outlet property="playButton" destination="YKD-Pn-rO3" id="SJX-7a-7wK"/>
                 <outlet property="slider" destination="a6B-iT-Q5a" id="cUj-9A-sIT"/>
-                <outlet property="tipsButton" destination="a7I-ia-x2J" id="isk-Ac-Ibv"/>
-                <outlet property="tipsLabel" destination="IHt-Vg-pxl" id="UcG-vV-6ei"/>
-                <outlet property="tipsView" destination="Ukk-Zq-IGh" id="DHV-fh-E0C"/>
                 <outlet property="topView" destination="28x-zU-Voh" id="qeY-Tq-Fox"/>
                 <outlet property="totalLabel" destination="hFv-tM-IiL" id="iLn-Rc-r3Y"/>
             </connections>
@@ -130,33 +127,6 @@
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-ks-67l">
                     <rect key="frame" x="177.66666666666666" y="95" width="20" height="20"/>
                 </activityIndicatorView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ukk-Zq-IGh">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GoP-sg-QfY">
-                            <rect key="frame" x="158.66666666666666" y="78" width="58" height="54"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHt-Vg-pxl">
-                                    <rect key="frame" x="0.0" y="0.0" width="58" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7I-ia-x2J">
-                                    <rect key="frame" x="0.0" y="25" width="58" height="29"/>
-                                    <color key="backgroundColor" red="0.91372549020000005" green="0.18823529410000001" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <state key="normal" title="立即购买"/>
-                                </button>
-                            </subviews>
-                        </stackView>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="GoP-sg-QfY" firstAttribute="centerX" secondItem="Ukk-Zq-IGh" secondAttribute="centerX" id="SFY-m4-lps"/>
-                        <constraint firstItem="GoP-sg-QfY" firstAttribute="centerY" secondItem="Ukk-Zq-IGh" secondAttribute="centerY" id="viu-Bp-aIS"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28x-zU-Voh">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -167,19 +137,15 @@
             </subviews>
             <constraints>
                 <constraint firstItem="uAO-ks-67l" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6wl-tK-XaH"/>
-                <constraint firstItem="Ukk-Zq-IGh" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="9k2-Bb-C4x"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aXI-FN-XDH" secondAttribute="trailing" id="IHn-85-RXc"/>
                 <constraint firstItem="uAO-ks-67l" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="JWj-4g-wlQ"/>
                 <constraint firstItem="aXI-FN-XDH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="QB3-Hb-UDQ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="28x-zU-Voh" secondAttribute="trailing" id="Z3W-uI-VU0"/>
-                <constraint firstItem="Ukk-Zq-IGh" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="c3t-Ki-Axb"/>
                 <constraint firstItem="28x-zU-Voh" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="cou-jf-tDN"/>
                 <constraint firstItem="28x-zU-Voh" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="eQP-ZK-YBS"/>
-                <constraint firstItem="Ukk-Zq-IGh" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="g6G-lb-tMK"/>
                 <constraint firstItem="I6y-21-5bB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nXH-6m-xKj"/>
                 <constraint firstItem="I6y-21-5bB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rPV-oS-kME"/>
                 <constraint firstItem="aXI-FN-XDH" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="tQg-Hi-5BI"/>
-                <constraint firstItem="Ukk-Zq-IGh" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="ur1-fk-xNl"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -22,10 +22,6 @@ class PortraitControlView: UIView, Controlable, NibLoadable {
 
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
 
-    @IBOutlet weak var tipsView: UIView!
-    @IBOutlet weak var tipsLabel: UILabel!
-    @IBOutlet weak var tipsButton: UIButton!
-
     var isDragSlider: Bool = false
     var isShowToolBar: Bool = false
 
@@ -96,21 +92,15 @@ class PortraitControlView: UIView, Controlable, NibLoadable {
             indicatorView.isHidden = false
         case .playing:
             indicatorView.isHidden = true
-            print("播放")
+            playButton.isSelected = true
         case .paused:
-            print("暂定")
+            playButton.isSelected = false
         case .readyToPlay:
             indicatorView.isHidden = true
         case .playEnd:
             player?.seek(to: .zero)
             playButton.isSelected = false
-        case .buy:
-            tipsView.isHidden = false
-            tipsLabel.text = "该内容需购买后观看"
-        case .vip:
-            tipsView.isHidden = false
-            tipsLabel.text = "该内容需购买VIP会员后观看"
-        case .failed(let error):
+        case .failed:
             break
         }
     }
@@ -159,7 +149,7 @@ extension PortraitControlView {
         } else {
             player?.play()
         }
-        sender.isSelected = !sender.isSelected
+//        sender.isSelected = !sender.isSelected
     }
 
     @IBAction func fullScreenAction(_ sender: UIButton) {

@@ -78,7 +78,20 @@ class Player {
     }
 
     func setItem(_ item: PlayerItem?) {
-        guard let item = item, let url = URL(string: item.url) else { return }
+        guard let item = item, item.state != .offline, let url = URL(string: item.url) else {
+            tipsView.setState(.offline)
+            layoutTipsView()
+            return
+        }
+
+        tipsView.removeFromSuperview()
+
+        if isFullScreen {
+            layoutlandScapeControl()
+        } else {
+            layoutPortraitControl()
+        }
+
         self.currentItem = item
 
         itemObserver.removeObserver()
@@ -101,6 +114,7 @@ private extension Player {
     }
 
     func layoutPortraitControl() {
+        portraitControlView.removeFromSuperview()
         portraitControlView.translatesAutoresizingMaskIntoConstraints = false
         displayView.addSubview(portraitControlView)
         portraitControlView.topAnchor.constraint(equalTo: displayView.topAnchor).isActive = true
@@ -110,6 +124,7 @@ private extension Player {
     }
 
     func layoutlandScapeControl() {
+        landScapeControlView.removeFromSuperview()
         landScapeControlView.translatesAutoresizingMaskIntoConstraints = false
         displayView.addSubview(landScapeControlView)
         landScapeControlView.topAnchor.constraint(equalTo: displayView.topAnchor).isActive = true
@@ -119,6 +134,8 @@ private extension Player {
     }
 
     func layoutTipsView() {
+        portraitControlView.removeFromSuperview()
+        landScapeControlView.removeFromSuperview()
         tipsView.isFullScreen = isFullScreen
         tipsView.translatesAutoresizingMaskIntoConstraints = false
         displayView.addSubview(tipsView)

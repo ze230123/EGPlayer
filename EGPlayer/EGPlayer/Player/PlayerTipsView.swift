@@ -13,6 +13,7 @@ class PlayerTipsView: UIView, NibLoadable, TipsControlable {
     var isFullScreen: Bool = false
 
     var closeBlock: (() -> Void)?
+    var actionBlock: (() -> Void)?
 
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var fullButton: UIButton!
@@ -20,6 +21,9 @@ class PlayerTipsView: UIView, NibLoadable, TipsControlable {
     @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var tipsButton: UIButton!
 
+    deinit {
+        print("PlayerTipsView_deinit")
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         initViewFromNib()
@@ -31,6 +35,18 @@ class PlayerTipsView: UIView, NibLoadable, TipsControlable {
     }
 
     func setState(_ state: PlayerItem.State) {
+        tipsButton.isHidden = state == .offline
+
+        switch state {
+        case .buy:
+            tipsLabel.text = "该内容需购买后观看"
+        case .vip:
+            tipsLabel.text = "该内容需购买VIP会员后观看"
+        case .offline:
+            tipsLabel.text = "该内容已下架"
+        default:
+            break
+        }
     }
 }
 
@@ -51,5 +67,6 @@ extension PlayerTipsView {
     }
 
     @IBAction func tipsAction() {
+        actionBlock?()
     }
 }
