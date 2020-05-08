@@ -67,7 +67,7 @@ extension GestureController {
                 view?.playTimeWillChange()
             } else if x < y {
                 direction = .vertical
-                    isVolume = locationPoint.x <= frame.size.width / 2
+                isVolume = locationPoint.x <= frame.size.width / 2
             }
             startPoint = locationPoint
         case .changed:
@@ -75,9 +75,9 @@ extension GestureController {
                 view?.playTimeDidChange((locationPoint.x - startPoint.x) / 10)
             } else {
                 if isVolume {
-                    view?.setVolume(locationPoint.y)
+                    view?.setVolume(veloctyPoint.y / 10000)
                 } else {
-                    view?.setBrightness(locationPoint.y)
+                    view?.setBrightness(veloctyPoint.y / 10000)
                 }
             }
         case .ended:

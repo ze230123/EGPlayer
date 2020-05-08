@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class PortraitControlView: UIView, Controlable, NibLoadable {
     @IBOutlet weak var progressView: UIProgressView!
@@ -21,6 +22,16 @@ class PortraitControlView: UIView, Controlable, NibLoadable {
     @IBOutlet weak var totalLabel: UILabel!
 
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+
+    lazy var volumeView: UISlider? = {
+        let volumeView = MPVolumeView()
+        for view in volumeView.subviews {
+            if let slider = view as? UISlider {
+                return slider
+            }
+        }
+        return nil
+    }()
 
     var isDragSlider: Bool = false
     var isShowToolBar: Bool = false
@@ -80,10 +91,12 @@ class PortraitControlView: UIView, Controlable, NibLoadable {
 
     func setVolume(_ volume: CGFloat) {
         print("设置音量", volume)
+        volumeView?.value -= Float(volume)
     }
 
     func setBrightness(_ brightness: CGFloat) {
         print("设置亮度", brightness)
+        UIScreen.main.brightness -= brightness
     }
 
     func playerDidChangedState(_ state: PlayerState) {
