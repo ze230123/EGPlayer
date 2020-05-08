@@ -10,8 +10,8 @@ import UIKit
 import AVFoundation
 
 class LandScapeControlView: UIView, Controlable, NibLoadable {
-    @IBOutlet weak var bufferSlider: Slider!
-    @IBOutlet weak var slider: Slider!
+    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var slider: BMTimeSlider!
 
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
@@ -108,7 +108,7 @@ class LandScapeControlView: UIView, Controlable, NibLoadable {
     }
 
     func setBuffer(_ buffer: Double) {
-        bufferSlider.value = Float(buffer)
+        progressView.progress = Float(buffer)
     }
 
     func setPlayTime(_ time: Double) {
@@ -138,7 +138,7 @@ extension LandScapeControlView {
     func prepare() {
         playButton.isSelected = player?.isPlaying ?? false
 
-        bufferSlider.setThumbImage(UIImage(), for: .normal)
+//        bufferSlider.setThumbImage(UIImage(), for: .normal)
 
         slider.maximumTrackTintColor = UIColor.clear
         slider.minimumTrackTintColor = UIColor(hex: 0xEF3D33)

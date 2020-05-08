@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandScapeControlView" customModule="EGPlayer" customModuleProvider="target">
             <connections>
                 <outlet property="bottomView" destination="7gl-H0-JQp" id="h8r-tC-wxs"/>
-                <outlet property="bufferSlider" destination="zz2-Tl-NWg" id="ndF-A4-l2b"/>
                 <outlet property="currentLabel" destination="u7Q-DW-jo5" id="4d6-wv-UO8"/>
                 <outlet property="indicatorView" destination="dDb-Eb-Ntf" id="T00-Pw-d8x"/>
                 <outlet property="playButton" destination="0T0-kS-V8q" id="Qcv-fo-loY"/>
+                <outlet property="progressView" destination="ex3-oC-qEb" id="Mua-1t-ZFa"/>
                 <outlet property="slider" destination="eZI-M5-PJJ" id="zyI-b5-8Gd"/>
                 <outlet property="topView" destination="Je7-Wq-0Uc" id="dQD-Sr-v03"/>
                 <outlet property="totalLabel" destination="ID1-46-dIu" id="1Ov-A0-OLR"/>
@@ -43,12 +43,12 @@
                                         <view contentMode="scaleToFill" horizontalHuggingPriority="240" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="740" translatesAutoresizingMaskIntoConstraints="NO" id="csF-Kh-GHh">
                                             <rect key="frame" x="80.5" y="0.0" width="735" height="30"/>
                                             <subviews>
-                                                <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-Tl-NWg" customClass="Slider" customModule="EGPlayer" customModuleProvider="target">
-                                                    <rect key="frame" x="-2" y="0.0" width="739" height="31"/>
-                                                    <color key="minimumTrackTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </slider>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eZI-M5-PJJ" customClass="Slider" customModule="EGPlayer" customModuleProvider="target">
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ex3-oC-qEb">
+                                                    <rect key="frame" x="0.0" y="14" width="735" height="2"/>
+                                                    <color key="progressTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="trackTintColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </progressView>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eZI-M5-PJJ" customClass="BMTimeSlider" customModule="EGPlayer" customModuleProvider="target">
                                                     <rect key="frame" x="-2" y="0.0" width="739" height="31"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="buffer">
@@ -65,11 +65,12 @@
                                                 </slider>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="eZI-M5-PJJ" firstAttribute="centerY" secondItem="csF-Kh-GHh" secondAttribute="centerY" id="A8g-rw-f7G"/>
-                                                <constraint firstItem="zz2-Tl-NWg" firstAttribute="leading" secondItem="csF-Kh-GHh" secondAttribute="leading" id="O6k-ZH-AGm"/>
-                                                <constraint firstAttribute="trailing" secondItem="zz2-Tl-NWg" secondAttribute="trailing" id="OwT-5p-E3Z"/>
-                                                <constraint firstItem="zz2-Tl-NWg" firstAttribute="centerY" secondItem="csF-Kh-GHh" secondAttribute="centerY" id="PuP-GZ-KoU"/>
+                                                <constraint firstItem="ex3-oC-qEb" firstAttribute="centerY" secondItem="csF-Kh-GHh" secondAttribute="centerY" id="3g0-0W-dL3"/>
+                                                <constraint firstItem="ex3-oC-qEb" firstAttribute="leading" secondItem="csF-Kh-GHh" secondAttribute="leading" id="7Yp-BM-Gmh"/>
+                                                <constraint firstAttribute="bottom" secondItem="eZI-M5-PJJ" secondAttribute="bottom" id="9GV-2U-9R2"/>
+                                                <constraint firstAttribute="trailing" secondItem="ex3-oC-qEb" secondAttribute="trailing" id="D7O-YS-s1q"/>
                                                 <constraint firstAttribute="trailing" secondItem="eZI-M5-PJJ" secondAttribute="trailing" id="Qfd-ys-tVm"/>
+                                                <constraint firstItem="eZI-M5-PJJ" firstAttribute="top" secondItem="csF-Kh-GHh" secondAttribute="top" id="WwQ-LO-7Ax"/>
                                                 <constraint firstItem="eZI-M5-PJJ" firstAttribute="leading" secondItem="csF-Kh-GHh" secondAttribute="leading" id="YKV-B6-EiG"/>
                                                 <constraint firstAttribute="height" constant="30" id="hrc-R9-3Yo"/>
                                             </constraints>

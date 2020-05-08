@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PortraitControlView" customModule="EGPlayer" customModuleProvider="target">
             <connections>
                 <outlet property="bottomView" destination="aXI-FN-XDH" id="GZL-4x-nZ5"/>
-                <outlet property="bufferSlider" destination="VAn-a8-pYi" id="6nw-jf-Eji"/>
                 <outlet property="currentLabel" destination="jGI-CB-hno" id="yRX-G3-fnk"/>
                 <outlet property="indicatorView" destination="uAO-ks-67l" id="l91-6G-aFZ"/>
                 <outlet property="playButton" destination="YKD-Pn-rO3" id="SJX-7a-7wK"/>
+                <outlet property="progressView" destination="EsB-Jd-XOl" id="jPO-p4-MGH"/>
                 <outlet property="slider" destination="a6B-iT-Q5a" id="cUj-9A-sIT"/>
                 <outlet property="topView" destination="28x-zU-Voh" id="qeY-Tq-Fox"/>
                 <outlet property="totalLabel" destination="hFv-tM-IiL" id="iLn-Rc-r3Y"/>
@@ -58,12 +58,12 @@
                         <view contentMode="scaleToFill" horizontalHuggingPriority="240" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="740" translatesAutoresizingMaskIntoConstraints="NO" id="cGv-dF-OWa">
                             <rect key="frame" x="84.666666666666671" y="7" width="205.66666666666663" height="30"/>
                             <subviews>
-                                <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-a8-pYi" customClass="Slider" customModule="EGPlayer" customModuleProvider="target">
-                                    <rect key="frame" x="-2" y="0.0" width="209.66666666666666" height="31"/>
-                                    <color key="minimumTrackTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                </slider>
-                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-iT-Q5a" customClass="Slider" customModule="EGPlayer" customModuleProvider="target">
+                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="EsB-Jd-XOl">
+                                    <rect key="frame" x="0.0" y="14" width="205.66666666666666" height="2"/>
+                                    <color key="progressTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="trackTintColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                </progressView>
+                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-iT-Q5a" customClass="BMTimeSlider" customModule="EGPlayer" customModuleProvider="target">
                                     <rect key="frame" x="-2" y="0.0" width="209.66666666666666" height="31"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="buffer">
@@ -81,12 +81,13 @@
                             </subviews>
                             <constraints>
                                 <constraint firstItem="a6B-iT-Q5a" firstAttribute="leading" secondItem="cGv-dF-OWa" secondAttribute="leading" id="4vo-hw-Orc"/>
+                                <constraint firstAttribute="trailing" secondItem="EsB-Jd-XOl" secondAttribute="trailing" id="9M3-8x-4If"/>
+                                <constraint firstItem="a6B-iT-Q5a" firstAttribute="top" secondItem="cGv-dF-OWa" secondAttribute="top" id="ANL-wa-GGF"/>
+                                <constraint firstItem="EsB-Jd-XOl" firstAttribute="centerY" secondItem="cGv-dF-OWa" secondAttribute="centerY" id="G4p-RL-8cN"/>
                                 <constraint firstAttribute="height" constant="30" id="Km0-Vj-DjV"/>
+                                <constraint firstAttribute="bottom" secondItem="a6B-iT-Q5a" secondAttribute="bottom" id="MOo-Hh-jR1"/>
                                 <constraint firstAttribute="trailing" secondItem="a6B-iT-Q5a" secondAttribute="trailing" id="Rnn-WM-Y7w"/>
-                                <constraint firstAttribute="trailing" secondItem="VAn-a8-pYi" secondAttribute="trailing" id="d2o-Ef-KDm"/>
-                                <constraint firstItem="VAn-a8-pYi" firstAttribute="leading" secondItem="cGv-dF-OWa" secondAttribute="leading" id="pdT-x6-eJp"/>
-                                <constraint firstItem="VAn-a8-pYi" firstAttribute="centerY" secondItem="cGv-dF-OWa" secondAttribute="centerY" id="qfQ-4Q-Cdj"/>
-                                <constraint firstItem="a6B-iT-Q5a" firstAttribute="centerY" secondItem="cGv-dF-OWa" secondAttribute="centerY" id="rmr-LL-W7c"/>
+                                <constraint firstItem="EsB-Jd-XOl" firstAttribute="leading" secondItem="cGv-dF-OWa" secondAttribute="leading" id="qiD-z4-ydP"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DU-dm-YwJ">
