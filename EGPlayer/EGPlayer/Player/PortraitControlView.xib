@@ -63,13 +63,8 @@
                                     <color key="progressTintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="trackTintColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 </progressView>
-                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-iT-Q5a" customClass="BMTimeSlider" customModule="EGPlayer" customModuleProvider="target">
+                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-iT-Q5a" customClass="BMTimeSlider" customModule="EGPlayer" customModuleProvider="target">
                                     <rect key="frame" x="-2" y="0.0" width="209.66666666666666" height="31"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="buffer">
-                                            <real key="value" value="0.5"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="sliderTouchDown:" destination="-1" eventType="touchDown" id="R7N-X7-pJW"/>
                                         <action selector="sliderTouchUpInSide:" destination="-1" eventType="touchUpOutside" id="Ojw-Wy-oRl"/>

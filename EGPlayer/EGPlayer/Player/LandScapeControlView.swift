@@ -151,8 +151,6 @@ extension LandScapeControlView {
     func prepare() {
         playButton.isSelected = player?.isPlaying ?? false
 
-//        bufferSlider.setThumbImage(UIImage(), for: .normal)
-
         slider.maximumTrackTintColor = UIColor.clear
         slider.minimumTrackTintColor = UIColor(hex: 0xEF3D33)
         slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
@@ -164,7 +162,23 @@ extension LandScapeControlView {
         } else {
             player?.play()
         }
-//        sender.isSelected = !sender.isSelected
+    }
+
+    @IBAction func rateAction() {
+        guard let rate = player?.rate else { return }
+        hideAnimate()
+        let rateView = RateListView(rate: rate)
+
+        rateView.didSelect = { [unowned self] rate in
+            self.player?.rate = rate
+        }
+
+        rateView.closeBlock = { [unowned self] view in
+            view.hide()
+            self.showAnimate()
+        }
+
+        rateView.show(in: superview)
     }
 
     @IBAction func fullScreenAction(_ sender: UIButton) {
@@ -195,7 +209,7 @@ extension LandScapeControlView {
     }
 
     func showAnimate() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.topView.isHidden = false
             self.bottomView.isHidden = false
         }) { (_) in

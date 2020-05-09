@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		763FDD61246549890015C079 /* RateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763FDD60246549890015C079 /* RateListView.swift */; };
+		763FDD63246549920015C079 /* RateListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763FDD62246549920015C079 /* RateListView.xib */; };
 		766D947E245294070037F0EC /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766D947D245294070037F0EC /* NavigationViewController.swift */; };
 		7679FD7224504B55007CA928 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD7124504B55007CA928 /* AppDelegate.swift */; };
 		7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679FD7324504B55007CA928 /* SceneDelegate.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		763FDD60246549890015C079 /* RateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateListView.swift; sourceTree = "<group>"; };
+		763FDD62246549920015C079 /* RateListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RateListView.xib; sourceTree = "<group>"; };
 		766D947D245294070037F0EC /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		7679FD6E24504B55007CA928 /* EGPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7679FD7124504B55007CA928 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 				7685CF8F2463BB9600B627FE /* PlayerItem.swift */,
 				7685CF952463E6E800B627FE /* PlayerTipsView.swift */,
 				7685CF972463E6F100B627FE /* PlayerTipsView.xib */,
+				763FDD60246549890015C079 /* RateListView.swift */,
+				763FDD62246549920015C079 /* RateListView.xib */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 				7679FD7E24504B56007CA928 /* LaunchScreen.storyboard in Resources */,
 				7679FD7B24504B56007CA928 /* Assets.xcassets in Resources */,
 				7679FD7924504B55007CA928 /* Main.storyboard in Resources */,
+				763FDD63246549920015C079 /* RateListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +355,7 @@
 				7679FD7224504B55007CA928 /* AppDelegate.swift in Sources */,
 				7685CF8C2463B9FB00B627FE /* DisplayerLayer.swift in Sources */,
 				7688B0982456E09C00D27811 /* PlayerItemObserver.swift in Sources */,
+				763FDD61246549890015C079 /* RateListView.swift in Sources */,
 				7688B0A42459129800D27811 /* NewFullViewController.swift in Sources */,
 				7679FD7424504B55007CA928 /* SceneDelegate.swift in Sources */,
 			);

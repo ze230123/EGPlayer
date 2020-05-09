@@ -50,11 +50,6 @@
                                                 </progressView>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eZI-M5-PJJ" customClass="BMTimeSlider" customModule="EGPlayer" customModuleProvider="target">
                                                     <rect key="frame" x="-2" y="0.0" width="739" height="31"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="buffer">
-                                                            <real key="value" value="0.5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="sliderTouchDown:" destination="-1" eventType="touchDown" id="aX6-dF-rds"/>
                                                         <action selector="sliderTouchUpInSide:" destination="-1" eventType="touchUpOutside" id="lhD-8h-nUB"/>
@@ -125,6 +120,9 @@
                                             <rect key="frame" x="782" y="17.5" width="30" height="29"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <state key="normal" title="倍速"/>
+                                            <connections>
+                                                <action selector="rateAction" destination="-1" eventType="touchUpInside" id="Sj6-nq-cuj"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
